@@ -99,10 +99,30 @@ def parse_export(filepath, as_of=None, strict=True):
     return data,{"exportDate":export_date,"globalRegistrations":total,"italianOrganizations":len(organizations),
                  "excludedOrOtherCountry":excluded,"rejectedItalianRecords":bad,"sourceUrl":FEED}
 
+ILLEGAL_XML_REFERENCES=re.compile(rb"&#(?:x[0-9A-Fa-f]{1,8}|[0-9]{1,10});")
+ILLEGAL_XML_BYTES=re.compile(rb"[\x00-\x08\x0B\x0C\x0E-\x1F]")
+
+def clean_xml_bytes(data):
+    corrections=0
+    def replacement(match):
+        nonlocal corrections
+        raw=match.group(0)[2:-1].decode("ascii")
+        try: code=int(raw[1:],16) if raw[0].lower()=="x" else int(raw,10)
+        except ValueError: return match.group(0)
+        valid=code in (9,10,13) or 32<=code<=0xD7FF or 0xE000<=code<=0xFFFD or 0x10000<=code<=0x10FFFF
+        if valid:return match.group(0)
+        corrections+=1
+        return b"?"
+    data=ILLEGAL_XML_REFERENCES.sub(replacement,data)
+    data,count=ILLEGAL_XML_BYTES.subn(b"?",data)
+    return data,corrections+count
+
 def download_file(target):
     req=urllib.request.Request(FEED,headers={"Accept":"application/xml,text/xml,*/*","User-Agent":"PowerMapResearch/0.5"})
     sha=hashlib.sha256()
     amount=0
+    corrected=0
+    pending=b''
     with urllib.request.urlopen(req, timeout=180) as response:
         final=urllib.parse.urlparse(response.geturl())
         if final.scheme != "https" or final.hostname not in {"ec.europa.eu","transparency-register.europa.eu"}:
@@ -114,9 +134,20 @@ def download_file(target):
                 amount+=len(chunk)
                 if amount>MAX_BYTES:raise ValueError("Official XML exceeds size limit")
                 sha.update(chunk)
-                file.write(chunk)
+                data=pending+chunk
+                cutoff=max(0,len(data)-32)
+                last_amp=data.rfind(b"&",max(0,cutoff-24),cutoff)
+                if last_amp>=0:cutoff=last_amp
+                clean,amount_fixed=clean_xml_bytes(data[:cutoff])
+                corrected+=amount_fixed
+                file.write(clean)
+                pending=data[cutoff:]
+            final,amount_fixed=clean_xml_bytes(pending)
+            corrected+=amount_fixed
+            file.write(final)
     if amount<1024: raise ValueError("Official XML empty or truncated")
-    return amount,sha.hexdigest()
+    if corrected>500:raise ValueError("Official XML contains too many invalid characters")
+    return amount,sha.hexdigest(),corrected
 
 def main():
     parser=argparse.ArgumentParser()
@@ -125,10 +156,10 @@ def main():
     opts=parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="eu-register-") as temp:
         source=opts.fixture or str(Path(temp)/"official.xml")
-        amount,digest=(None,None) if opts.fixture else download_file(source)
+        amount,digest,corrected=(None,None,0) if opts.fixture else download_file(source)
         data,report=parse_export(source)
     if amount is not None:
-        report.update(downloadBytes=amount,archiveSha256=digest)
+        report.update(downloadBytes=amount,archiveSha256=digest,invalidXmlCharactersReplaced=corrected)
     else:
         report.update(archiveSha256=hashlib.sha256(Path(opts.fixture).read_bytes()).hexdigest())
     output=Path(opts.output_dir)
