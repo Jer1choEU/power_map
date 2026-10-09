@@ -10,6 +10,7 @@ import re
 import sys
 import tempfile
 import urllib.request
+import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,7 +29,7 @@ def value(element, name):
     found = descendant(element, name)
     return (found.text or "").strip() if found is not None else ""
 
-def parse_export(filepath, as_of=None):
+def parse_export(filepath, as_of=None, strict=True):
     date = as_of or datetime.now(timezone.utc).date().isoformat()
     organizations = {}
     total, excluded, bad = 0, 0, 0
@@ -78,7 +79,7 @@ def parse_export(filepath, as_of=None):
         if root is not None: root.clear()
     if not export_date or not re.fullmatch(r"\d{4}-\d{2}-\d{2}",export_date):
         raise ValueError("Missing export date in official XML")
-    if total < 10000 or len(organizations) < 200 or len(organizations) > 6000:
+    if strict and (total < 10000 or len(organizations) < 200 or len(organizations) > 6000):
         raise ValueError(f"Unexpected number of records: global {total}, Italian {len(organizations)}")
     registry_id="eu-tr:institution:transparency-register"
     entities=[{"id":registry_id,"name":"Registro per la trasparenza dell'UE","type":"istituzione",
