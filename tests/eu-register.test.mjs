@@ -25,7 +25,7 @@ test('source switch, identity churn and missing proof stop publication',()=>{
  const {data,report}=make();
  assert.throws(()=>verifyEuPublication(data,{...report,sourceUrl:'https://example.org'}),/Unexpected official/);
  const altered=structuredClone(data);altered.relations[0].to='eu-tr:organization:123';
- assert.throws(()=>verifyEuPublication(altered,report),/Broken registration/);
+ assert.throws(()=>verifyEuPublication(altered,report),/Bad registration relation|Broken registration/);
  const churn=structuredClone(data);churn.relations=churn.relations.slice(0,180);const meta={...report,italianOrganizations:180};
  assert.throws(()=>verifyEuPublication(churn,meta,data,report),/Unexpected Italian|Registration count|drop|churn/);
 });
