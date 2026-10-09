@@ -1,22 +1,45 @@
-name: Discover ANAC resources
+name: ANAC first-lot discovery and header verification
 on:
   workflow_dispatch:
   schedule:
     - cron: '45 7 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/discover-anac.mjs'
+      - 'scripts/anac-intake.py'
+      - 'tests/test_anac_intake.py'
+      - '.github/workflows/discover-anac.yml'
+  pull_request:
+    paths:
+      - 'scripts/discover-anac.mjs'
+      - 'scripts/anac-intake.py'
+      - 'tests/test_anac_intake.py'
+      - '.github/workflows/discover-anac.yml'
 permissions:
   contents: read
 jobs:
   discover:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/discover-anac.mjs
-      - uses: actions/upload-artifact@v4
+      - name: Unit test archive safety and selection
+        run: python3 -m unittest discover -s tests -p 'test_anac_intake.py' -v
+      - name: Query ANAC official CKAN catalog
+        run: node scripts/discover-anac.mjs
+      - name: Read official CSV headers (no records imported)
+        run: python3 scripts/anac-intake.py build/anac-resources.json
+      - name: Publish diagnostic report
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: anac-resource-catalog
-          path: build/anac-resources.json
-          retention-days: 30
+          name: anac-first-lot-report
+          path: |
+            build/anac-resources.json
+            build/anac-intake.json
+          if-no-files-found: warn
+          retention-days: 14
