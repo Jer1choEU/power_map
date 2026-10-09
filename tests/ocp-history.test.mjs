@@ -27,7 +27,7 @@ test('future year is only accepted when signed official CDN HEAD succeeds',async
  const redirected=async(_url,opts)=>opts.method==='HEAD'?new Response(null,{status:200}):new Response(null,{status:302,headers:{location:'https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2026.jsonl.gz'}});
  assert.equal(await availableFutureYear('2026',{fetcher:redirected}),true);
  assert.equal(await availableFutureYear('2026',{fetcher:async()=>new Response(null,{status:404})}),false);
- assert.rejects(availableFutureYear('2026',{fetcher:async()=>new Response(null,{status:302,headers:{location:'https://evil.com/file.gz'}})}),/Untrusted/);
+ await assert.rejects(availableFutureYear('2026',{fetcher:async()=>new Response(null,{status:302,headers:{location:'https://evil.com/file.gz'}})}),/Untrusted/);
 });
 test('automatic historical publication rejects missing annual identity',()=>{
  const graph={version:1,mode:'real',sources:[{url:'https://data.open-contracting.org/en/publication/117'}],entities:Array.from({length:1100},(_,i)=>({id:'company:it-cf:'+i,name:'Demo'})),relations:Array.from({length:3000},(_,i)=>({id:'rel:ocp:'+i,from:'company:it-cf:0',to:'company:it-cf:1',type:'aggiudicazione',label:'CIG ABC1234567',sourceIds:['source:ocp-anac']}))};
