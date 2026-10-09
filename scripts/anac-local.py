@@ -58,7 +58,7 @@ def main():
             item = inspect_local(file)
             results.append({"status": "ok", **item})
             print(f"OK {item['fileName']}: {item['kind']}, {len(item['header'])} columns")
-        except (ValueError, OSError, EOFError, RuntimeError, Exception) as error:
+        except Exception as error:
             results.append({"status": "error", "fileName": Path(file).name, "error": str(error)})
             print(f"ERROR {Path(file).name}: {error}", file=sys.stderr)
     output = Path(args.output)
