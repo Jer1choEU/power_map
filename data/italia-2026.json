@@ -56,6 +56,36 @@
       "name": "Pasqualino Monti",
       "type": "persona",
       "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "institution:mef",
+      "name": "Ministero dell'Economia e delle Finanze",
+      "type": "istituzione",
+      "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
+    },
+    {
+      "id": "company:cdp",
+      "name": "Cassa Depositi e Prestiti S.p.A.",
+      "type": "impresa",
+      "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
+    },
+    {
+      "id": "company:cdp-reti",
+      "name": "CDP Reti S.p.A.",
+      "type": "impresa",
+      "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
+    },
+    {
+      "id": "company:blackrock",
+      "name": "BlackRock, Inc.",
+      "type": "impresa",
+      "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
+    },
+    {
+      "id": "person:romano-minozzi",
+      "name": "Romano Minozzi",
+      "type": "persona",
+      "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
     }
   ],
   "sources": [
@@ -78,6 +108,27 @@
       "title": "Terna - Consiglio di amministrazione",
       "url": "https://www.terna.it/it/Governance/consiglio-amministrazione",
       "publisher": "TERNA",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:eni-ownership",
+      "title": "Eni – Azionariato al 22 giugno 2026",
+      "url": "https://www.eni.com/it-IT/governance/azionariato.html",
+      "publisher": "Eni",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:terna-ownership",
+      "title": "Terna – Azionariato aggiornato a giugno 2026",
+      "url": "https://www.terna.it/it/investitori/azionariato-patti-parasociali",
+      "publisher": "Terna",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:enel-ownership",
+      "title": "Enel – Relazione annuale 2025, composizione azionaria al 31 dicembre 2025",
+      "url": "https://www.enel.com/content/dam/enel-com/documenti/investitori/Integrated-Annual-Report2025-04update.pdf",
+      "publisher": "Enel",
       "accessedAt": "2026-10-09"
     }
   ],
@@ -152,6 +203,102 @@
       "validTo": null,
       "sourceIds": [
         "source:terna"
+      ]
+    },
+    {
+      "id": "rel:ownership:mef-enel",
+      "from": "institution:mef",
+      "to": "company:enel",
+      "type": "partecipazione",
+      "label": "23,585% al 31/12/2025",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:enel-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:blackrock-enel",
+      "from": "company:blackrock",
+      "to": "company:enel",
+      "type": "partecipazione",
+      "label": "5,023% al 31/12/2025 (gestione del risparmio)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:enel-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:mef-eni",
+      "from": "institution:mef",
+      "to": "company:eni",
+      "type": "partecipazione",
+      "label": "2,17% al 22/06/2026",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:eni-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:cdp-eni",
+      "from": "company:cdp",
+      "to": "company:eni",
+      "type": "partecipazione",
+      "label": "30,92% al 22/06/2026",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:eni-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:blackrock-eni",
+      "from": "company:blackrock",
+      "to": "company:eni",
+      "type": "partecipazione",
+      "label": "4,64% al 22/06/2026",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:eni-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:minozzi-eni",
+      "from": "person:romano-minozzi",
+      "to": "company:eni",
+      "type": "partecipazione",
+      "label": "3,27% al 22/06/2026, aggregazione descritta dalla fonte",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:eni-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:cdpreti-terna",
+      "from": "company:cdp-reti",
+      "to": "company:terna",
+      "type": "partecipazione",
+      "label": "29,851% (giugno 2026)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:terna-ownership"
+      ]
+    },
+    {
+      "id": "rel:ownership:blackrock-terna",
+      "from": "company:blackrock",
+      "to": "company:terna",
+      "type": "partecipazione",
+      "label": "5,17% (giugno 2026)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:terna-ownership"
       ]
     }
   ]
