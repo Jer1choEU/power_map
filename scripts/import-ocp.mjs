@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import path from 'node:path';
 
 const PUBLIC_DOWNLOAD='https://data.open-contracting.org/en/publication/117/download?name=';
-const ALLOWED_YEARS=new Set(['2020','2021','2022','2023','2024','2025']);
+const ALLOWED_YEARS=new Set(['2020','2021','2022','2023','2024','2025','2026']);
 const isTaxId=id=>/^[0-9]{11}$/.test(String(id??''));
 const isCig=id=>/^[A-Za-z0-9]{10}$/.test(String(id??''));
 const isDate=date=>typeof date==='string' && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(date));
