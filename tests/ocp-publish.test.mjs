@@ -12,7 +12,8 @@ const nextReport=()=>structuredClone(priorReport);
 
 test('identical archive needs no repeated publication after migration',()=>{
  const report=nextReport();
- const oneTime=assessUpdate(fresh(),report,published,priorReport);
+ const legacy={...priorReport};delete legacy.publicationMode;delete legacy.qualityGate;
+ const oneTime=assessUpdate(fresh(),report,published,legacy);
  assert.equal(oneTime.action,'report-only');
  const alreadyUpdated={...priorReport,publicationMode:'automatic',qualityGate:'strict-v1'};
  assert.equal(assessUpdate(fresh(),report,published,alreadyUpdated).action,'none');
@@ -58,6 +59,9 @@ test('only metadata is refreshed for an unchanged initial archive',async()=>{
    fs.copyFile('data/ocp-2025.json',outputPath),
    fs.copyFile('data/ocp-2025-report.json',outputReportPath)
   ]);
+  const oldReport=JSON.parse(await fs.readFile(outputReportPath,'utf8'));
+  delete oldReport.publicationMode;delete oldReport.qualityGate;
+  await fs.writeFile(outputReportPath,JSON.stringify(oldReport));
   const original=await fs.readFile(outputPath,'utf8');
   const opts={candidatePath,reportPath,outputPath,outputReportPath};
   assert.equal((await stageFiles(opts)).action,'report-only');
