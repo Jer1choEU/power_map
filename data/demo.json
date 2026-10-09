@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "mode": "demo",
+  "updatedAt": "2026-10-09",
+  "entities": [
+    {
+      "id": "demo:person:alessia-riva",
+      "name": "Alessia Riva",
+      "type": "persona",
+      "description": "Soggetto fittizio, esclusivamente dimostrativo."
+    },
+    {
+      "id": "demo:person:marco-serra",
+      "name": "Marco Serra",
+      "type": "persona",
+      "description": "Soggetto fittizio, esclusivamente dimostrativo."
+    },
+    {
+      "id": "demo:company:orion",
+      "name": "Orion S.p.A.",
+      "type": "impresa",
+      "description": "Società inventata per la dimostrazione."
+    },
+    {
+      "id": "demo:company:aurora",
+      "name": "Aurora Holding",
+      "type": "impresa",
+      "description": "Società inventata per la dimostrazione."
+    },
+    {
+      "id": "demo:institution:civico",
+      "name": "Ente Civico X",
+      "type": "istituzione",
+      "description": "Ente inventato per la dimostrazione."
+    },
+    {
+      "id": "demo:media:rete",
+      "name": "Rete Notizie",
+      "type": "media",
+      "description": "Testata inventata per la dimostrazione."
+    }
+  ],
+  "sources": [],
+  "relations": [
+    {
+      "id": "demo:rel:1",
+      "from": "demo:person:alessia-riva",
+      "to": "demo:company:orion",
+      "type": "incarico",
+      "label": "Consigliera",
+      "validFrom": "2024-01-01",
+      "validTo": null,
+      "sourceIds": []
+    },
+    {
+      "id": "demo:rel:2",
+      "from": "demo:person:alessia-riva",
+      "to": "demo:company:aurora",
+      "type": "incarico",
+      "label": "Amministratrice",
+      "validFrom": "2023-01-01",
+      "validTo": null,
+      "sourceIds": []
+    },
+    {
+      "id": "demo:rel:3",
+      "from": "demo:person:marco-serra",
+      "to": "demo:company:aurora",
+      "type": "incarico",
+      "label": "Consigliere",
+      "validFrom": "2024-05-01",
+      "validTo": null,
+      "sourceIds": []
+    }
+  ]
+}
