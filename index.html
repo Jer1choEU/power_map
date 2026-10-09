@@ -54,22 +54,41 @@ const svgNS='http://www.w3.org/2000/svg';
 function el(tag,attrs={},parent=svg){const e=document.createElementNS(svgNS,tag);for(const [key,value] of Object.entries(attrs))e.setAttribute(key,value);parent.appendChild(e);return e}
 function activeTypes(){return new Set([...filters.querySelectorAll('input:checked')].map(i=>i.value))}
 function render(){
-const types=activeTypes(),term=search.value.trim().toLocaleLowerCase('it'),kind=relation.value;
-let visible=nodes.filter(n=>types.has(n.type));let ids=new Set(visible.map(n=>n.id));
-let links=edges.filter(e=>ids.has(e.from)&&ids.has(e.to)&&(kind==='all'||e.type===kind));
-if(term){const matches=new Set(visible.filter(n=>n.name.toLocaleLowerCase('it').includes(term)).map(n=>n.id));const near=new Set(matches);links.forEach(e=>{if(matches.has(e.from))near.add(e.to);if(matches.has(e.to))near.add(e.from)});visible=visible.filter(n=>near.has(n.id));ids=new Set(visible.map(n=>n.id));links=links.filter(e=>ids.has(e.from)&&ids.has(e.to))}
-if(kind!=='all'){const connected=new Set(links.flatMap(e=>[e.from,e.to]));visible=visible.filter(n=>connected.has(n.id))}
-svg.replaceChildren();
-for(const edge of links){const a=nodes.find(n=>n.id===edge.from),b=nodes.find(n=>n.id===edge.to);el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'edge'+(selected&&(edge.from===selected||edge.to===selected)?' focus':'')})}
-for(const n of visible){const g=el('g',{class:'node'+(selected===n.id?' active':''),role:'button',tabindex:'0','aria-label':'Apri scheda di '+n.name});el('circle',{cx:n.x,cy:n.y,r:n.type==='persona'?24:29,fill:colors[n.type]},g);const t=el('text',{x:n.x,y:n.y+47,'text-anchor':'middle'},g);t.textContent=n.name;g.addEventListener('click',()=>select(n.id));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id)}})}
-stats.textContent=visible.length+' soggetti · '+links.length+' relazioni · '+(currentData?.sources?.length??0)+' fonti';
-if(selected&&!visible.some(n=>n.id===selected))selected=null;
-showDetails();
+ const types=activeTypes(),term=search.value.trim().toLocaleLowerCase('it'),kind=relation.value;
+ const allowed=nodes.filter(n=>types.has(n.type));
+ const allowedIds=new Set(allowed.map(n=>n.id));
+ let links=edges.filter(e=>allowedIds.has(e.from)&&allowedIds.has(e.to)&&(kind==='all'||e.type===kind));
+ const degree=new Map();
+ for(const e of links){degree.set(e.from,(degree.get(e.from)||0)+1);degree.set(e.to,(degree.get(e.to)||0)+1)}
+ const matches=new Set(allowed.filter(n=>n.name.toLocaleLowerCase('it').includes(term)).map(n=>n.id));
+ if(term){
+  for(const e of links)if(e.label.toLocaleLowerCase('it').includes(term)){matches.add(e.from);matches.add(e.to)}
+ }
+ let candidates=allowed;
+ if(term){
+  const near=new Set(matches);
+  for(const e of links){if(matches.has(e.from))near.add(e.to);if(matches.has(e.to))near.add(e.from)}
+  candidates=candidates.filter(n=>near.has(n.id));
+ }
+ if(kind!=='all'){const connected=new Set(links.flatMap(e=>[e.from,e.to]));candidates=candidates.filter(n=>connected.has(n.id))}
+ const totalFound=candidates.length,MAX_DRAW=64;
+ if(candidates.length>MAX_DRAW){
+  candidates.sort((a,b)=>Number(matches.has(b.id))-Number(matches.has(a.id))||(degree.get(b.id)||0)-(degree.get(a.id)||0)||a.name.localeCompare(b.name,'it'));
+  candidates=candidates.slice(0,MAX_DRAW);
+ }
+ const visible=candidates.map((n,i)=>{const count=candidates.length,angle=2*Math.PI*i/count;return {...n,x:380+218*Math.cos(angle),y:304+205*Math.sin(angle)}});
+ const map=new Map(visible.map(n=>[n.id,n]));links=links.filter(e=>map.has(e.from)&&map.has(e.to));
+ svg.replaceChildren();
+ for(const edge of links){const a=map.get(edge.from),b=map.get(edge.to);el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'edge'+(selected&&(edge.from===selected||edge.to===selected)?' focus':'')})}
+ for(const n of visible){const g=el('g',{class:'node'+(selected===n.id?' active':''),role:'button',tabindex:'0','aria-label':'Apri scheda di '+n.name});el('circle',{cx:n.x,cy:n.y,r:n.type==='persona'?22:25,fill:colors[n.type]},g);const t=el('text',{x:n.x,y:n.y+37,'text-anchor':'middle'},g);t.textContent=n.name.length>28?n.name.slice(0,27)+'…':n.name;g.addEventListener('click',()=>select(n.id));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id)}})}
+ stats.textContent=nodes.length+' soggetti · '+edges.length+' relazioni totali · '+visible.length+'/'+totalFound+' in vista'+(totalFound>MAX_DRAW?' · usa la ricerca':'');
+ if(selected&&!visible.some(n=>n.id===selected))selected=null;
+ showDetails();
 }
 function showDetails(){details.replaceChildren();if(!selected){const p=document.createElement('p');p.className='empty';p.textContent='Seleziona un nodo della rete per leggere la sua scheda e le relazioni collegate.';details.append(p);return}
 const n=nodes.find(x=>x.id===selected);const tag=document.createElement('span');tag.className='tag';tag.textContent=n.type.toUpperCase();const title=document.createElement('h3');title.className='details-title';title.textContent=n.name;const description=document.createElement('p');description.className='details';description.textContent=n.description;details.append(tag,title,description);
 const heading=document.createElement('h2');heading.textContent='Relazioni';details.append(heading);
-const related=edges.filter(e=>e.from===n.id||e.to===n.id);for(const e of related){const other=nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));const div=document.createElement('div');div.className='relation';const strong=document.createElement('strong');strong.textContent=other.name;const small=document.createElement('span');small.className='meta';small.textContent=e.label+' · '+e.type+(currentData?.mode==='real'?' · fonte ufficiale':' · dato fittizio');div.append(strong,small);if(currentData?.mode==='real'){for(const id of e.sourceIds||[]){const source=currentData.sources.find(x=>x.id===id);if(source){const p=document.createElement('p');const a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Fonte: '+source.title;p.append(a);const date=document.createElement('span');date.className='meta';date.textContent=' · consultata '+source.accessedAt;p.append(date);div.append(p)}}}details.append(div)}
+const related=edges.filter(e=>e.from===n.id||e.to===n.id);for(const e of related){const other=nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));const div=document.createElement('div');div.className='relation';const strong=document.createElement('strong');strong.textContent=other.name;const small=document.createElement('span');small.className='meta';small.textContent=e.label+' · '+e.type+(e.eventDate?' · '+e.eventDate:'')+(currentData?.mode==='real'?' · fonte documentata':' · dato fittizio');div.append(strong,small);if(currentData?.mode==='real'){for(const id of e.sourceIds||[]){const source=currentData.sources.find(x=>x.id===id);if(source){const p=document.createElement('p');const a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Fonte: '+source.title;p.append(a);const date=document.createElement('span');date.className='meta';date.textContent=' · consultata '+source.accessedAt;p.append(date);div.append(p)}}}details.append(div)}
 }
 function select(id){selected=id;render()}
 search.addEventListener('input',render);relation.addEventListener('change',render);filters.addEventListener('change',render);document.getElementById('reset').addEventListener('click',()=>{selected=null;search.value='';relation.value='all';filters.querySelectorAll('input').forEach(i=>i.checked=true);render()});
@@ -77,22 +96,24 @@ render();
 async function loadDataset(){
  const kind=document.getElementById('dataset').value;
  try{
-  const response=await fetch('./data/'+(kind==='real'?'italia-2026':'demo')+'.json',{cache:'no-store'});
+  const file=kind==='real'?'italia-2026':kind==='ocp'?'ocp-2025':'demo';
+  const response=await fetch('./data/'+file+'.json',{cache:'no-store'});
   if(!response.ok)throw Error('HTTP '+response.status);
   const data=await response.json();
-  if(data.mode!==kind||!Array.isArray(data.entities)||!Array.isArray(data.relations)||!Array.isArray(data.sources))throw Error('Dataset non valido');
+  if(data.mode!==(kind==='demo'?'demo':'real')||!Array.isArray(data.entities)||!Array.isArray(data.relations)||!Array.isArray(data.sources))throw Error('Dataset non valido');
   currentData=data;
   const cx=380,cy=310;
   const ordered=[...data.entities].sort((a,b)=>a.type.localeCompare(b.type)||a.name.localeCompare(b.name,'it'));
   nodes=ordered.map((n,i)=>{const ring=i%2,idx=Math.floor(i/2),count=Math.ceil((ordered.length-ring)/2);const angle=2*Math.PI*idx/count+(ring?0.23:0);const radius=ring?228:125;return {...n,x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)};});
   edges=data.relations.map(e=>({...e}));
   selected=null;
-  document.getElementById('dataNotice').textContent=kind==='real'?'Partecipazioni e incarichi documentati, con date di riferimento differenti. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
-  document.querySelector('.pill').textContent=kind==='real'?'ITALIA 2026 · FONTI UFFICIALI':'PROTOTIPO · DATI DIMOSTRATIVI';
+  document.getElementById('dataNotice').textContent=kind==='ocp'?'Archivio OCDS ANAC via Open Contracting Partnership: contiene aggiudicazioni anche anteriori al 2025. I collegamenti non implicano illeciti.':kind==='real'?'Partecipazioni e incarichi documentati, con date di riferimento differenti. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
+  document.querySelector('.pill').textContent=kind==='ocp'?'APPALTI · ARCHIVIO ANAC/OCP':kind==='real'?'ITALIA 2026 · FONTI UFFICIALI':'PROTOTIPO · DATI DIMOSTRATIVI';
   render();
- }catch(error){currentData=null;console.error(error);document.getElementById('dataNotice').textContent='Errore caricamento dataset: usa un server HTTP o GitHub Pages.';render()}
+ }catch(error){currentData=null;nodes=[];edges=[];console.error(error);document.getElementById('dataNotice').textContent='Errore caricamento dataset: usa un server HTTP o GitHub Pages.';render()}
 }
 document.getElementById('dataset').addEventListener('change',loadDataset);
+fetch('./data/ocp-2025.json',{method:'HEAD'}).then(response=>{if(response.ok){const option=document.createElement('option');option.value='ocp';option.textContent='Appalti ANAC · archivio OCP';document.getElementById('dataset').append(option)}}).catch(()=>{});
 loadDataset();
 </script>
 </body></html>
