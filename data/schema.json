@@ -47,7 +47,8 @@
               "persona",
               "impresa",
               "istituzione",
-              "media"
+              "media",
+              "organizzazione"
             ]
           },
           "description": {
@@ -125,7 +126,8 @@
               "incarico",
               "partecipazione",
               "collaborazione",
-              "aggiudicazione"
+              "aggiudicazione",
+              "iscrizione"
             ]
           },
           "label": {
