@@ -7,7 +7,11 @@
   "limited": true,
   "conflictingNames": 56,
   "source": "https://data.open-contracting.org/en/publication/117",
+  "resolvedArchiveUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2025.jsonl.gz",
   "archiveSha256": "8169ab8e654bd6aae6c1cb00d3d8d8f3e8e63f4e765565e6f952b62575557350",
   "entities": 1264,
-  "relations": 1200
+  "relations": 1200,
+  "publicationMode": "automatic",
+  "qualityGate": "strict-v1",
+  "publishedSource": "OCP mirror of ANAC"
 }
