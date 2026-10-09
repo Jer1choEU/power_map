@@ -17,3 +17,9 @@ L'archivio del Registro Trasparenza UE è distribuito principalmente come XML/XL
 
 ## Limitazioni
 Questa funzionalità **non recupera ancora automaticamente i dataset reali** perché non sono stati configurati URL di distribuzione verificati. Nessun nuovo soggetto entra nella mappa e non viene fatta alcuna pubblicazione automatica. I report sono solo artefatti temporanei.
+
+## Streaming per dataset grandi
+
+Il nuovo `scripts/download-official.mjs` trasferisce il CSV direttamente su disco con streaming, checksum SHA-256 incrementale e limite di 250 MiB per file. Rifiuta redirect, domini non autorizzati, file vuoti, dimensioni dichiarate eccessive e download incompleti. In caso di errore elimina il file temporaneo; la pubblicazione resta disabilitata. Il manifest continua a essere vuoto fino alla verifica di un URL diretto e della licenza.
+
+Test locali: `node --test tests/download.test.mjs`. Il workflow GitHub esegue i test prima del download. Non sono stati eseguiti scaricamenti di dati ANAC in questa modifica.
