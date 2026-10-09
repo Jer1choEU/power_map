@@ -3,6 +3,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '15 8 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import-ocp.mjs'
+      - 'scripts/stage-ocp.mjs'
+      - 'data/schema.json'
+      - '.github/workflows/ocp-ingest.yml'
   pull_request:
     paths:
       - 'scripts/import-ocp.mjs'
@@ -41,9 +48,7 @@ jobs:
       - name: Propose refreshed sample graph
         if: github.event_name != 'pull_request'
         run: |
-          mkdir -p data
-          cp build/ocp/candidate.json data/ocp-2025.json
-          cp build/ocp/report.json data/ocp-2025-report.json
+          node scripts/stage-ocp.mjs
       - name: Open review pull request (never auto-merge)
         if: github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v7
