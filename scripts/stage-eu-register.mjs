@@ -17,6 +17,7 @@ export function verifyEuPublication(candidate,report,previous=null,priorReport=n
  requireSafe(candidate.entities?.length===report.italianOrganizations+1,'Entity count mismatch');
  requireSafe(candidate.relations?.length===report.italianOrganizations,'Registration count mismatch');
  requireSafe(report.rejectedItalianRecords<=100,'Too many invalid registrants');
+ requireSafe((report.invalidXmlCharactersReplaced??0)<=500,'Too many invalid XML characters');
  const nodes=new Set(candidate.entities.map(e=>e.id)),ids=new Set();
  requireSafe(nodes.size===candidate.entities.length,'Duplicate organization IDs');
  for(const rel of candidate.relations){
