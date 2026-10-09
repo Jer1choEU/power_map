@@ -1,0 +1,59 @@
+name: Automated ANAC all-years history
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 9 * * 2'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import-ocp-history.mjs'
+      - 'scripts/stage-ocp-history.mjs'
+      - '.github/workflows/ocp-history.yml'
+  pull_request:
+    paths:
+      - 'scripts/import-ocp-history.mjs'
+      - 'scripts/stage-ocp-history.mjs'
+      - 'tests/ocp-history.test.mjs'
+      - '.github/workflows/ocp-history.yml'
+permissions:
+  contents: write
+concurrency:
+  group: ocp-anac-history
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test annual merging and safety
+        run: node --test tests/ocp-history.test.mjs
+      - name: Fetch, merge and validate all available annual ANAC archives
+        run: node scripts/import-ocp-history.mjs
+      - name: Validate historical source-backed graph
+        run: node scripts/validate.mjs build/ocp-history/candidate.json
+      - name: Save processing manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: anac-history-report
+          path: build/ocp-history/report.json
+          retention-days: 30
+      - name: Stage changes only if safety gates pass
+        if: github.event_name != 'pull_request'
+        run: node scripts/stage-ocp-history.mjs
+      - name: Publish on main without human approval
+        if: github.event_name != 'pull_request'
+        run: |
+          git add -- data/ocp-history.json data/ocp-history-report.json
+          if git diff --cached --quiet; then
+            echo 'Historical ANAC data unchanged.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'data: automatically refresh historical ANAC awards'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

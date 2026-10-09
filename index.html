@@ -14,14 +14,14 @@
 <aside>
 <h2>Esplora la rete</h2>
 <label for="dataset">Dataset</label><select id="dataset"><option value="real">Italia 2026 · fonti ufficiali</option><option value="demo">Dimostrazione · dati inventati</option></select><label for="search">Cerca un soggetto</label><input id="search" type="search" placeholder="Nome, organizzazione…" autocomplete="off">
-<label for="relationship">Tipo di relazione</label><select id="relationship"><option value="all">Tutte le relazioni</option><option value="incarico">Incarico</option><option value="partecipazione">Partecipazione</option><option value="collaborazione">Collaborazione</option><option value="aggiudicazione">Aggiudicazione</option></select>
+<label for="relationship">Tipo di relazione</label><select id="relationship"><option value="all">Tutte le relazioni</option><option value="incarico">Incarico</option><option value="partecipazione">Partecipazione</option><option value="collaborazione">Collaborazione</option><option value="aggiudicazione">Aggiudicazione</option><option value="iscrizione">Iscrizione al registro UE</option></select>
 <label>Mostra soggetti</label><div class="checks" id="filters">
 <label><input type="checkbox" value="persona" checked> Persone</label>
 <label><input type="checkbox" value="impresa" checked> Imprese</label>
 <label><input type="checkbox" value="istituzione" checked> Istituzioni</label>
-<label><input type="checkbox" value="media" checked> Media</label>
+<label><input type="checkbox" value="media" checked> Media</label><label><input type="checkbox" value="organizzazione" checked> Organizzazioni</label>
 </div>
-<div class="legend"><div><span class="dot" style="background:#91b7ff"></span>Persone</div><div><span class="dot" style="background:#d6a3fc"></span>Imprese</div><div><span class="dot" style="background:#77ddc0"></span>Istituzioni</div><div><span class="dot" style="background:#ffc78b"></span>Media</div></div>
+<div class="legend"><div><span class="dot" style="background:#91b7ff"></span>Persone</div><div><span class="dot" style="background:#d6a3fc"></span>Imprese</div><div><span class="dot" style="background:#77ddc0"></span>Istituzioni</div><div><span class="dot" style="background:#ffc78b"></span>Media</div><div><span class="dot" style="background:#89d1ed"></span>Organizzazioni</div></div>
 <div class="notice"><span id="dataNotice">Incarichi societari documentati su fonti ufficiali.</span></div>
 </aside>
 <section class="stage" aria-label="Grafo interattivo delle relazioni"><div class="stage-top"><div><h2>Mappa delle connessioni</h2><p id="stats" aria-live="polite"></p></div><button id="reset">Ripristina vista</button></div><svg id="graph" viewBox="0 0 760 600" role="group" aria-label="Seleziona i nodi per leggere le relazioni"></svg></section>
@@ -47,7 +47,7 @@ let edges=[
 {from:'p3',to:'c2',type:'collaborazione',label:'Collaborazione'},
 {from:'c2',to:'c1',type:'partecipazione',label:'Quota dimostrativa'}
 ];
-const colors={persona:'#91b7ff',impresa:'#d6a3fc',istituzione:'#77ddc0',media:'#ffc78b'};
+const colors={persona:'#91b7ff',impresa:'#d6a3fc',istituzione:'#77ddc0',media:'#ffc78b',organizzazione:'#89d1ed'};
 const search=document.getElementById('search'),relation=document.getElementById('relationship'),filters=document.getElementById('filters'),svg=document.getElementById('graph'),details=document.getElementById('details'),stats=document.getElementById('stats');
 let selected=null;let currentData=null;
 const svgNS='http://www.w3.org/2000/svg';
@@ -96,7 +96,8 @@ render();
 async function loadDataset(){
  const kind=document.getElementById('dataset').value;
  try{
-  const file=kind==='real'?'italia-2026':kind==='ocp'?'ocp-2025':'demo';
+  const files={real:'italia-2026',ocp:'ocp-2025',history:'ocp-history',eu:'eu-transparency',demo:'demo'};
+  const file=files[kind]||'demo';
   const response=await fetch('./data/'+file+'.json',{cache:'no-store'});
   if(!response.ok)throw Error('HTTP '+response.status);
   const data=await response.json();
@@ -107,13 +108,15 @@ async function loadDataset(){
   nodes=ordered.map((n,i)=>{const ring=i%2,idx=Math.floor(i/2),count=Math.ceil((ordered.length-ring)/2);const angle=2*Math.PI*idx/count+(ring?0.23:0);const radius=ring?228:125;return {...n,x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)};});
   edges=data.relations.map(e=>({...e}));
   selected=null;
-  document.getElementById('dataNotice').textContent=kind==='ocp'?'Archivio OCDS ANAC via Open Contracting Partnership: contiene aggiudicazioni anche anteriori al 2025. I collegamenti non implicano illeciti.':kind==='real'?'Partecipazioni e incarichi documentati, con date di riferimento differenti. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
-  document.querySelector('.pill').textContent=kind==='ocp'?'APPALTI · ARCHIVIO ANAC/OCP':kind==='real'?'ITALIA 2026 · FONTI UFFICIALI':'PROTOTIPO · DATI DIMOSTRATIVI';
+  document.getElementById('dataNotice').textContent=kind==='eu'?'Registro per la trasparenza UE: il collegamento rappresenta soltanto l’iscrizione, non un rapporto illecito o una collaborazione con le istituzioni.':kind==='history'?'Archivio storico ANAC/OCP 2020–2026: gli appalti conservano le date effettive e non implicano illeciti.':kind==='ocp'?'Archivio OCDS ANAC via Open Contracting Partnership: contiene aggiudicazioni anche anteriori al 2025. I collegamenti non implicano illeciti.':kind==='real'?'Partecipazioni e incarichi documentati, con date di riferimento differenti. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
+  document.querySelector('.pill').textContent=kind==='eu'?'UE · REGISTRO TRASPARENZA':kind==='history'?'APPALTI · ARCHIVIO STORICO':kind==='ocp'?'APPALTI · ARCHIVIO ANAC/OCP':kind==='real'?'ITALIA 2026 · FONTI UFFICIALI':'PROTOTIPO · DATI DIMOSTRATIVI';
   render();
  }catch(error){currentData=null;nodes=[];edges=[];console.error(error);document.getElementById('dataNotice').textContent='Errore caricamento dataset: usa un server HTTP o GitHub Pages.';render()}
 }
 document.getElementById('dataset').addEventListener('change',loadDataset);
-fetch('./data/ocp-2025.json',{method:'HEAD'}).then(response=>{if(response.ok){const option=document.createElement('option');option.value='ocp';option.textContent='Appalti ANAC · archivio OCP';document.getElementById('dataset').append(option)}}).catch(()=>{});
+for(const [kind,file,label] of [['ocp','ocp-2025','Appalti ANAC · campione 2025'],['history','ocp-history','Appalti ANAC · storico completo'],['eu','eu-transparency','Registro trasparenza UE · Italia']]){
+ fetch('./data/'+file+'.json',{method:'HEAD'}).then(response=>{if(response.ok){const option=document.createElement('option');option.value=kind;option.textContent=label;document.getElementById('dataset').append(option)}}).catch(()=>{});
+}
 loadDataset();
 </script>
 </body></html>

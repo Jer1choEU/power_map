@@ -1,0 +1,63 @@
+name: Automated EU Transparency Register
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 5 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import-eu-register.py'
+      - 'scripts/stage-eu-register.mjs'
+      - '.github/workflows/eu-register.yml'
+  pull_request:
+    paths:
+      - 'scripts/import-eu-register.py'
+      - 'scripts/stage-eu-register.mjs'
+      - 'tests/eu-register.test.mjs'
+      - 'data/schema.json'
+      - '.github/workflows/eu-register.yml'
+permissions:
+  contents: write
+concurrency:
+  group: eu-transparency-auto
+  cancel-in-progress: false
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify EU publication safety
+        run: node --test tests/eu-register.test.mjs
+      - name: Verify XML parser against synthetic records
+        run: python3 -m unittest discover -s tests -p 'test_eu_register.py' -v
+      - name: Download and stream EU Transparency Register XML
+        run: python3 scripts/import-eu-register.py
+      - name: Validate official registrations
+        run: node scripts/validate.mjs build/eu-register/candidate.json
+      - name: Preserve source evidence and report
+        uses: actions/upload-artifact@v4
+        with:
+          name: eu-transparency-checked-source
+          path: |
+            build/eu-register/report.json
+          retention-days: 30
+      - name: Stage only verified changes
+        if: github.event_name != 'pull_request'
+        run: node scripts/stage-eu-register.mjs
+      - name: Auto-publish to main, without human merge
+        if: github.event_name != 'pull_request'
+        run: |
+          git add -- data/eu-transparency.json data/eu-transparency-report.json
+          if git diff --cached --quiet; then
+            echo 'Official EU data unchanged.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'data: auto publish verified EU Transparency Register'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
