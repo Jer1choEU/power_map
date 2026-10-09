@@ -11,5 +11,9 @@ for(const url of urls){
    const res=await fetch(url,{headers:{'Accept':'application/json, application/ld+json, text/html;q=0.5','User-Agent':'PowerMap/0.5 (+https://github.com/Jer1choEU/power_map)'},redirect:'manual',signal:AbortSignal.timeout(12000)});
    const text=await res.text();
    console.log(JSON.stringify({url,status:res.status,contentType:res.headers.get('content-type'),bytes:text.length,snippet:text.replace(/\s+/g,' ').slice(0,220)}));
+   if(res.ok && url.includes('/api/hub/search/datasets/')){
+     const dataset=JSON.parse(text).result;
+     console.log(JSON.stringify({dataset:url,keys:Object.keys(dataset),candidateArrays:Object.entries(dataset).filter(([k,v])=>/distrib|resource/i.test(k)).map(([key,v])=>({key,type:Array.isArray(v)?'array':typeof v,length:Array.isArray(v)?v.length:undefined,first:Array.isArray(v)?JSON.stringify(v[0]).slice(0,1600):JSON.stringify(v).slice(0,1600)}))}));
+   }
  }catch(err){console.log(JSON.stringify({url,error:String(err)}))}
 }
