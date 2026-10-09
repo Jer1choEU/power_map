@@ -1,4 +1,4 @@
-name: Automatic ANAC OCDS intake
+name: Automatic ANAC OCDS intake and publication
 on:
   workflow_dispatch:
   schedule:
@@ -8,19 +8,21 @@ on:
     paths:
       - 'scripts/import-ocp.mjs'
       - 'scripts/stage-ocp.mjs'
+      - 'tests/ocp.test.mjs'
+      - 'tests/ocp-publish.test.mjs'
       - 'data/schema.json'
       - '.github/workflows/ocp-ingest.yml'
   pull_request:
     paths:
       - 'scripts/import-ocp.mjs'
+      - 'scripts/stage-ocp.mjs'
       - 'tests/ocp.test.mjs'
-      - 'tests/fixtures/ocp-sample.jsonl'
+      - 'tests/ocp-publish.test.mjs'
       - 'scripts/validate.mjs'
       - 'data/schema.json'
       - '.github/workflows/ocp-ingest.yml'
 permissions:
   contents: write
-  pull-requests: write
 concurrency:
   group: ocp-anac-intake
   cancel-in-progress: false
@@ -30,44 +32,36 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate transformer against fixture
-        run: node --test tests/ocp.test.mjs
-      - name: Download ANAC 2025 historical OCDS JSONL (OCP) and build candidate
+      - name: Verify extraction and automatic publication safety
+        run: node --test tests/ocp.test.mjs tests/ocp-publish.test.mjs
+      - name: Download and transform historical ANAC data from OCP
         run: node scripts/import-ocp.mjs --year 2025 --max-relations 1200 --output-dir build/ocp
-      - name: Validate all source-backed relations
+      - name: Validate downloaded source-backed graph
         run: node scripts/validate.mjs build/ocp/candidate.json
-      - name: Save full candidate for review
+      - name: Retain diagnostics and evidence
         uses: actions/upload-artifact@v4
         with:
-          name: anac-ocp-review-candidate
+          name: anac-ocp-validated-candidate
           path: build/ocp/
           retention-days: 30
-      - name: Propose refreshed sample graph
+      - name: Stage only verified and safe changes
+        if: github.event_name != 'pull_request'
+        run: node scripts/stage-ocp.mjs
+      - name: Publish validated updates directly to main
         if: github.event_name != 'pull_request'
         run: |
-          node scripts/stage-ocp.mjs
-      - name: Open review pull request (never auto-merge)
-        if: github.event_name != 'pull_request'
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: automation/ocp-anac-2025
-          delete-branch: true
-          commit-message: 'data: refresh sourced ANAC OCDS 2025 archive sample'
-          title: 'Dati: aggiornamento automatico appalti ANAC (OCP 2025)'
-          body: |
-            Import automatico da archivio Open Contracting Partnership (dati pubblicati originariamente da ANAC).
-            
-            - Massimo 1200 relazioni, con CIG, identificativi fiscali e data reale dell'aggiudicazione.
-            - L'archivio 2025 può contenere aggiudicazioni di anni precedenti.
-            - Collegamenti generati automaticamente: **richiedono revisione prima del merge**.
-            - Sorgente: https://data.open-contracting.org/en/publication/117
-            - Licenza dichiarata: CC BY 4.0.
-            
-            Controllare il report e i casi ambigui, inclusa la possibile presenza di ditte individuali.
-          add-paths: |
-            data/ocp-2025.json
-            data/ocp-2025-report.json
+          git add -- data/ocp-2025.json data/ocp-2025-report.json
+          if git diff --cached --quiet; then
+            echo 'No changes: archive already current.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'data: automatically refresh verified ANAC/OCP procurement archive'
+            git push origin HEAD:main
+            echo 'Verified ANAC/OCP dataset published to main.'
+          fi
