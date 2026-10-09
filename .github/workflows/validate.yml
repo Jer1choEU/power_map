@@ -22,5 +22,6 @@ jobs:
           node-version: '22'
       - run: node scripts/validate.mjs data/demo.json
       - run: node scripts/validate.mjs data/italia-2026.json
+      - run: if [ -f data/ocp-2025.json ]; then node scripts/validate.mjs data/ocp-2025.json; fi
       - run: node --test tests/*.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_anac*.py' -v
