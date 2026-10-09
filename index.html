@@ -62,7 +62,7 @@ if(kind!=='all'){const connected=new Set(links.flatMap(e=>[e.from,e.to]));visibl
 svg.replaceChildren();
 for(const edge of links){const a=nodes.find(n=>n.id===edge.from),b=nodes.find(n=>n.id===edge.to);el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'edge'+(selected&&(edge.from===selected||edge.to===selected)?' focus':'')})}
 for(const n of visible){const g=el('g',{class:'node'+(selected===n.id?' active':''),role:'button',tabindex:'0','aria-label':'Apri scheda di '+n.name});el('circle',{cx:n.x,cy:n.y,r:n.type==='persona'?24:29,fill:colors[n.type]},g);const t=el('text',{x:n.x,y:n.y+47,'text-anchor':'middle'},g);t.textContent=n.name;g.addEventListener('click',()=>select(n.id));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id)}})}
-stats.textContent=visible.length+' soggetti · '+links.length+' relazioni';
+stats.textContent=visible.length+' soggetti · '+links.length+' relazioni · '+(currentData?.sources?.length??0)+' fonti';
 if(selected&&!visible.some(n=>n.id===selected))selected=null;
 showDetails();
 }
@@ -82,8 +82,9 @@ async function loadDataset(){
   const data=await response.json();
   if(data.mode!==kind||!Array.isArray(data.entities)||!Array.isArray(data.relations)||!Array.isArray(data.sources))throw Error('Dataset non valido');
   currentData=data;
-  const cx=380,cy=300,radius=Math.min(205,90+data.entities.length*13);
-  nodes=data.entities.map((n,i)=>({...n,x:cx+radius*Math.cos((2*Math.PI*i)/data.entities.length),y:cy+radius*Math.sin((2*Math.PI*i)/data.entities.length)}));
+  const cx=380,cy=310;
+  const ordered=[...data.entities].sort((a,b)=>a.type.localeCompare(b.type)||a.name.localeCompare(b.name,'it'));
+  nodes=ordered.map((n,i)=>{const ring=i%2,idx=Math.floor(i/2),count=Math.ceil((ordered.length-ring)/2);const angle=2*Math.PI*idx/count+(ring?0.23:0);const radius=ring?228:125;return {...n,x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)};});
   edges=data.relations.map(e=>({...e}));
   selected=null;
   document.getElementById('dataNotice').textContent=kind==='real'?'Partecipazioni e incarichi documentati, con date di riferimento differenti. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
