@@ -5,7 +5,7 @@
 Il mirror Open Contracting Partnership espone l'archivio ANAC in formato **OCDS JSONL compresso**. La distribuzione 2025 è stata scaricata con successo da GitHub Actions (HTTP 200) e contiene stazioni appaltanti, aggiudicazioni, fornitori, identificatori, date e importi.
 
 - Scheda dataset: https://data.open-contracting.org/en/publication/117
-- Distribuzione 2025: https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2025.jsonl.gz
+- Collegamento stabile al download 2025: https://data.open-contracting.org/en/publication/117/download?name=2025.jsonl.gz (redirect verificato verso l'archivio su fastly.data.open-contracting.org)
 - Licenza della raccolta: Creative Commons Attribution 4.0 (attribuire ANAC e OCP, indicare le elaborazioni)
 
 **L'anno di archivio non è l'anno della gara:** il dataset 2025 contiene anche aggiudicazioni precedenti. Conserviamo la data dell'aggiudicazione nel campo `eventDate`, non come durata di un rapporto.
@@ -34,3 +34,5 @@ node --test tests/ocp.test.mjs
 node scripts/import-ocp.mjs --year 2025 --max-relations 1200
 node scripts/validate.mjs build/ocp/candidate.json
 ```
+
+Il workflow usa il link stabile OCP per seguire le nuove versioni: controlla che il redirect rimanga HTTPS e punti al dominio/CDN e alla struttura autorizzati. Il report registra l'URL della versione effettivamente scaricata e il suo checksum SHA-256.
