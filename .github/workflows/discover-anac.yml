@@ -1,0 +1,22 @@
+name: Discover ANAC resources
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 7 * * 1'
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/discover-anac.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anac-resource-catalog
+          path: build/anac-resources.json
+          retention-days: 30
