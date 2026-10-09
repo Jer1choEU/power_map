@@ -124,7 +124,8 @@
             "enum": [
               "incarico",
               "partecipazione",
-              "collaborazione"
+              "collaborazione",
+              "aggiudicazione"
             ]
           },
           "label": {
