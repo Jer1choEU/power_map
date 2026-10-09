@@ -151,6 +151,13 @@
               "type": "string"
             },
             "uniqueItems": true
+          },
+          "eventDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
           }
         }
       }
