@@ -8,6 +8,7 @@ on:
     paths:
       - 'scripts/discover-anac.mjs'
       - 'scripts/anac-intake.py'
+      - 'scripts/probe-anac-fallback.mjs'
       - 'tests/test_anac_intake.py'
       - '.github/workflows/discover-anac.yml'
   pull_request:
@@ -31,6 +32,9 @@ jobs:
         run: python3 -m unittest discover -s tests -p 'test_anac_intake.py' -v
       - name: Query ANAC official CKAN catalog
         run: node scripts/discover-anac.mjs
+      - name: Probe official catalog mirrors
+        if: always()
+        run: node scripts/probe-anac-fallback.mjs
       - name: Read official CSV headers (no records imported)
         run: python3 scripts/anac-intake.py build/anac-resources.json
       - name: Publish diagnostic report
