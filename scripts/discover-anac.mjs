@@ -1,29 +1,28 @@
 import fs from 'node:fs/promises';
-const endpoint='https://dati.anticorruzione.it/opendata/api/3/action/package_show';
+
+// ANAC's CKAN blocks CI runner traffic with HTTP 403. Official data.europa.eu
+// republishes the ANAC distributions' DCAT metadata with original URLs.
+const endpoint='https://data.europa.eu/api/hub/search/datasets/';
 const packages=['aggiudicazioni','aggiudicatari','cig-2025'];
 const output=[];
 const allowed=new Set(['dati.anticorruzione.it','www.anticorruzione.it','anticorruzione.it']);
 for(const id of packages){
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
  try{
-  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','User-Agent':'Mozilla/5.0 (compatible; PowerMap/0.4; +https://github.com/Jer1choEU/power_map)'},body:JSON.stringify({id}),signal:controller.signal,redirect:'manual'});
-  if(!response.ok)throw Error('HTTP '+response.status);
+  const response=await fetch(endpoint+encodeURIComponent(id),{headers:{Accept:'application/json'},signal:AbortSignal.timeout(25000),redirect:'manual'});
+  if(!response.ok)throw Error('EU catalog HTTP '+response.status);
   const body=await response.json();
-  if(body.success!==true||!Array.isArray(body.result?.resources))throw Error('Invalid CKAN response');
-  const resources=body.result.resources.flatMap(r=>{
-   const format=String(r.format||'').toUpperCase(),raw=String(r.url||'');
-   let url;try{url=new URL(raw)}catch{return []}
+  if(body?.result?.id!==id||!Array.isArray(body.result.distributions))throw Error('Unexpected EU catalog dataset');
+  const resources=body.result.distributions.flatMap(d=>{
+   if(String(d?.format?.id||'').toUpperCase()!=='CSV')return [];
+   const raw=d.download_url?.[0]??d.access_url?.[0];let url;
+   try{url=new URL(raw)}catch{return []}
    if(url.protocol!=='https:'||!allowed.has(url.hostname))return [];
-   const isCsv=format.includes('CSV')||/\.csv(?:$|\?)/i.test(url.pathname+url.search);
-   const isZip=format.includes('ZIP')||/\.zip(?:$|\?)/i.test(url.pathname+url.search);
-   if(!isCsv&&!isZip)return [];
-   return [{id:r.id,name:r.name,format,isCsv,isZip,url:url.href,size:r.size??null,lastModified:r.last_modified??null}];
+   return [{id:d.id,name:d.title?.it??d.title?.en??d.id,format:'CSV',isCsv:true,isZip:url.pathname.toLowerCase().endsWith('.zip'),url:url.href,size:d.byte_size??null,lastModified:d.modified??null,provenance:endpoint+id}];
   });
-  output.push({package:id,status:'ok',resources});
- }catch(e){output.push({package:id,status:'error',error:String(e)})}
- finally{clearTimeout(timer)}
+  output.push({package:id,status:'ok',resources,metadataSource:endpoint+id});
+ }catch(err){output.push({package:id,status:'error',error:String(err)});console.error(id+': '+String(err))}
 }
 await fs.mkdir('build',{recursive:true});
-await fs.writeFile('build/anac-resources.json',JSON.stringify({fetchedAt:new Date().toISOString(),catalog:endpoint,packages:output,warning:'Metadata only. URLs and licensing must be reviewed; ZIP archives require a separate safe extractor.'},null,2)+'\n');
-console.log(output.map(p=>p.package+': '+p.status+(p.resources?' ('+p.resources.length+' CSV/ZIP)':'' )).join('\n'));
-if(output.every(p=>p.status!=='ok'))process.exitCode=1;
+await fs.writeFile('build/anac-resources.json',JSON.stringify({fetchedAt:new Date().toISOString(),catalog:'data.europa.eu (ANAC metadata mirror)',packages:output,warning:'URLs point to original ANAC files. Metadata discovery is not a download or a validation of source rows.'},null,2)+'\n');
+console.log(output.map(p=>p.package+': '+p.status+(p.resources?' ('+p.resources.length+' CSV distributions)':'' )).join('\n'));
+if(output.every(p=>p.status!=='ok'||!p.resources.length))process.exitCode=1;

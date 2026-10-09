@@ -1,22 +1,68 @@
-name: Discover ANAC resources
+name: ANAC metadata discovery and guarded intake
 on:
   workflow_dispatch:
   schedule:
     - cron: '45 7 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/discover-anac.mjs'
+      - 'scripts/anac-intake.py'
+      - 'tests/test_anac_intake.py'
+      - '.github/workflows/discover-anac.yml'
+  pull_request:
+    paths:
+      - 'scripts/discover-anac.mjs'
+      - 'scripts/anac-intake.py'
+      - 'tests/test_anac_intake.py'
+      - '.github/workflows/discover-anac.yml'
 permissions:
   contents: read
 jobs:
   discover:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/discover-anac.mjs
-      - uses: actions/upload-artifact@v4
+      - name: Verify intake security
+        run: python3 -m unittest discover -s tests -p 'test_anac_intake.py' -v
+      - name: Discover original ANAC distributions via EU metadata
+        run: node scripts/discover-anac.mjs
+      - name: Check direct source access and inspect CSV headers
+        id: direct_download
+        continue-on-error: true
+        run: python3 scripts/anac-intake.py build/anac-resources.json
+      - name: Record accurate intake status
         if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          resources=Path('build/anac-resources.json')
+          intake=Path('build/anac-intake.json')
+          total=0
+          if resources.exists():
+              data=json.loads(resources.read_text())
+              total=sum(len(x.get('resources',[])) for x in data.get('packages',[]))
+          success=0
+          if intake.exists():
+              success=sum(x.get('status')=='ok' for x in json.loads(intake.read_text()).get('results',[]))
+          summary=f'## ANAC intake\n\n- Distributions discovered: **{total}**\n- Downloads inspected: **{success}**\n- Public graph records imported: **0**\n'
+          if success==0:
+              summary+='\n**Degraded:** original ANAC downloads unavailable or rejected from this runner. Metadata discovery may still be successful.\n'
+              print('::warning::ANAC source downloads unavailable; metadata discovery succeeded but intake remains blocked.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write(summary)
+          PY
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: anac-resource-catalog
-          path: build/anac-resources.json
-          retention-days: 30
+          name: anac-first-lot-report
+          path: |
+            build/anac-resources.json
+            build/anac-intake.json
+          if-no-files-found: warn
+          retention-days: 14
