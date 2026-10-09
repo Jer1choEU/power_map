@@ -29,7 +29,7 @@
 </main>
 <footer>POWER MAP · Prototipo open source · Nessun dato reale caricato</footer>
 <script>
-const nodes=[
+let nodes=[
 {id:'p1',name:'Alessia Riva',type:'persona',x:355,y:200,description:'Profilo dimostrativo di una dirigente.'},
 {id:'p2',name:'Marco Serra',type:'persona',x:500,y:365,description:'Profilo dimostrativo di un amministratore.'},
 {id:'p3',name:'Giulia Neri',type:'persona',x:175,y:375,description:'Profilo dimostrativo di una consulente.'},
@@ -38,7 +38,7 @@ const nodes=[
 {id:'i1',name:'Ente Civico X',type:'istituzione',x:180,y:210,description:'Ente fittizio.'},
 {id:'m1',name:'Rete Notizie',type:'media',x:615,y:480,description:'Gruppo editoriale fittizio.'}
 ];
-const edges=[
+let edges=[
 {from:'p1',to:'c1',type:'incarico',label:'Consigliera'},
 {from:'p1',to:'c2',type:'incarico',label:'Amministratrice'},
 {from:'p2',to:'c2',type:'incarico',label:'Consigliere'},
@@ -72,6 +72,23 @@ const heading=document.createElement('h2');heading.textContent='Relazioni';detai
 const related=edges.filter(e=>e.from===n.id||e.to===n.id);for(const e of related){const other=nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));const div=document.createElement('div');div.className='relation';const strong=document.createElement('strong');strong.textContent=other.name;const small=document.createElement('span');small.className='meta';small.textContent=e.label+' · '+e.type+' · dato fittizio';div.append(strong,small);details.append(div)}
 }
 function select(id){selected=id;render()}
-search.addEventListener('input',render);relation.addEventListener('change',render);filters.addEventListener('change',render);document.getElementById('reset').addEventListener('click',()=>{selected=null;search.value='';relation.value='all';filters.querySelectorAll('input').forEach(i=>i.checked=true);render()});render();
+search.addEventListener('input',render);relation.addEventListener('change',render);filters.addEventListener('change',render);document.getElementById('reset').addEventListener('click',()=>{selected=null;search.value='';relation.value='all';filters.querySelectorAll('input').forEach(i=>i.checked=true);render()});
+render();
+async function loadDataset(){
+  try {
+    const response=await fetch('./data/demo.json',{cache:'no-store'});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    const data=await response.json();
+    if(data.mode!=='demo'||!Array.isArray(data.entities)||!Array.isArray(data.relations))throw new Error('Formato demo non valido');
+    const positions=[[355,200],[500,365],[530,185],[335,385],[180,210],[615,480]];
+    nodes=data.entities.map((n,i)=>({...n,x:positions[i%positions.length][0],y:positions[i%positions.length][1]}));
+    edges=data.relations.map(e=>({...e}));
+    selected=null;
+    render();
+  } catch(error) {
+    console.warn('Dataset non disponibile; uso la demo integrata.',error);
+  }
+}
+loadDataset();
 </script>
 </body></html>
