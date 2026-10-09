@@ -300,6 +300,18 @@
       "sourceIds": [
         "source:terna-ownership"
       ]
+    },
+    {
+      "id": "rel:ownership:cdp-cdpreti",
+      "from": "company:cdp",
+      "to": "company:cdp-reti",
+      "type": "partecipazione",
+      "label": "Controllante di CDP Reti (quota non specificata nella fonte)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:terna-ownership"
+      ]
     }
   ]
 }
