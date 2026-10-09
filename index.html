@@ -13,7 +13,7 @@
 <main>
 <aside>
 <h2>Esplora la rete</h2>
-<label for="search">Cerca un soggetto</label><input id="search" type="search" placeholder="Nome, organizzazione…" autocomplete="off">
+<label for="dataset">Dataset</label><select id="dataset"><option value="real">Italia 2026 · fonti ufficiali</option><option value="demo">Dimostrazione · dati inventati</option></select><label for="search">Cerca un soggetto</label><input id="search" type="search" placeholder="Nome, organizzazione…" autocomplete="off">
 <label for="relationship">Tipo di relazione</label><select id="relationship"><option value="all">Tutte le relazioni</option><option value="incarico">Incarico</option><option value="partecipazione">Partecipazione</option><option value="collaborazione">Collaborazione</option></select>
 <label>Mostra soggetti</label><div class="checks" id="filters">
 <label><input type="checkbox" value="persona" checked> Persone</label>
@@ -22,12 +22,12 @@
 <label><input type="checkbox" value="media" checked> Media</label>
 </div>
 <div class="legend"><div><span class="dot" style="background:#91b7ff"></span>Persone</div><div><span class="dot" style="background:#d6a3fc"></span>Imprese</div><div><span class="dot" style="background:#77ddc0"></span>Istituzioni</div><div><span class="dot" style="background:#ffc78b"></span>Media</div></div>
-<div class="notice">Questa demo contiene soggetti e collegamenti <strong>inventati</strong> per mostrare l'interfaccia. Non descrive persone o aziende reali.</div>
+<div class="notice"><span id="dataNotice">Incarichi societari documentati su fonti ufficiali.</span></div>
 </aside>
 <section class="stage" aria-label="Grafo interattivo delle relazioni"><div class="stage-top"><div><h2>Mappa delle connessioni</h2><p id="stats" aria-live="polite"></p></div><button id="reset">Ripristina vista</button></div><svg id="graph" viewBox="0 0 760 600" role="group" aria-label="Seleziona i nodi per leggere le relazioni"></svg></section>
 <aside class="right"><h2>Dettaglio soggetto</h2><div id="details" aria-live="polite"><p class="empty">Seleziona un nodo della rete per leggere la sua scheda e le relazioni collegate.</p></div><div class="notice"><strong>Metodo:</strong> ogni relazione reale dovrà avere fonte, data di validità e tipologia. Nessun collegamento sarà trattato automaticamente come prova di illecito.</div></aside>
 </main>
-<footer>POWER MAP · Prototipo open source · Nessun dato reale caricato</footer>
+<footer>POWER MAP · Prototipo open source · Fonti consultabili nelle schede</footer>
 <script>
 let nodes=[
 {id:'p1',name:'Alessia Riva',type:'persona',x:355,y:200,description:'Profilo dimostrativo di una dirigente.'},
@@ -49,7 +49,7 @@ let edges=[
 ];
 const colors={persona:'#91b7ff',impresa:'#d6a3fc',istituzione:'#77ddc0',media:'#ffc78b'};
 const search=document.getElementById('search'),relation=document.getElementById('relationship'),filters=document.getElementById('filters'),svg=document.getElementById('graph'),details=document.getElementById('details'),stats=document.getElementById('stats');
-let selected=null;
+let selected=null;let currentData=null;
 const svgNS='http://www.w3.org/2000/svg';
 function el(tag,attrs={},parent=svg){const e=document.createElementNS(svgNS,tag);for(const [key,value] of Object.entries(attrs))e.setAttribute(key,value);parent.appendChild(e);return e}
 function activeTypes(){return new Set([...filters.querySelectorAll('input:checked')].map(i=>i.value))}
@@ -69,26 +69,29 @@ showDetails();
 function showDetails(){details.replaceChildren();if(!selected){const p=document.createElement('p');p.className='empty';p.textContent='Seleziona un nodo della rete per leggere la sua scheda e le relazioni collegate.';details.append(p);return}
 const n=nodes.find(x=>x.id===selected);const tag=document.createElement('span');tag.className='tag';tag.textContent=n.type.toUpperCase();const title=document.createElement('h3');title.className='details-title';title.textContent=n.name;const description=document.createElement('p');description.className='details';description.textContent=n.description;details.append(tag,title,description);
 const heading=document.createElement('h2');heading.textContent='Relazioni';details.append(heading);
-const related=edges.filter(e=>e.from===n.id||e.to===n.id);for(const e of related){const other=nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));const div=document.createElement('div');div.className='relation';const strong=document.createElement('strong');strong.textContent=other.name;const small=document.createElement('span');small.className='meta';small.textContent=e.label+' · '+e.type+' · dato fittizio';div.append(strong,small);details.append(div)}
+const related=edges.filter(e=>e.from===n.id||e.to===n.id);for(const e of related){const other=nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));const div=document.createElement('div');div.className='relation';const strong=document.createElement('strong');strong.textContent=other.name;const small=document.createElement('span');small.className='meta';small.textContent=e.label+' · '+e.type+(currentData?.mode==='real'?' · fonte ufficiale':' · dato fittizio');div.append(strong,small);if(currentData?.mode==='real'){for(const id of e.sourceIds||[]){const source=currentData.sources.find(x=>x.id===id);if(source){const p=document.createElement('p');const a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Fonte: '+source.title;p.append(a);div.append(p)}}}details.append(div)}
 }
 function select(id){selected=id;render()}
 search.addEventListener('input',render);relation.addEventListener('change',render);filters.addEventListener('change',render);document.getElementById('reset').addEventListener('click',()=>{selected=null;search.value='';relation.value='all';filters.querySelectorAll('input').forEach(i=>i.checked=true);render()});
 render();
 async function loadDataset(){
-  try {
-    const response=await fetch('./data/demo.json',{cache:'no-store'});
-    if(!response.ok)throw new Error('HTTP '+response.status);
-    const data=await response.json();
-    if(data.mode!=='demo'||!Array.isArray(data.entities)||!Array.isArray(data.relations))throw new Error('Formato demo non valido');
-    const positions=[[355,200],[500,365],[530,185],[335,385],[180,210],[615,480]];
-    nodes=data.entities.map((n,i)=>({...n,x:positions[i%positions.length][0],y:positions[i%positions.length][1]}));
-    edges=data.relations.map(e=>({...e}));
-    selected=null;
-    render();
-  } catch(error) {
-    console.warn('Dataset non disponibile; uso la demo integrata.',error);
-  }
+ const kind=document.getElementById('dataset').value;
+ try{
+  const response=await fetch('./data/'+(kind==='real'?'italia-2026':'demo')+'.json',{cache:'no-store'});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const data=await response.json();
+  if(data.mode!==kind||!Array.isArray(data.entities)||!Array.isArray(data.relations)||!Array.isArray(data.sources))throw Error('Dataset non valido');
+  currentData=data;
+  const cx=380,cy=300,radius=Math.min(205,90+data.entities.length*13);
+  nodes=data.entities.map((n,i)=>({...n,x:cx+radius*Math.cos((2*Math.PI*i)/data.entities.length),y:cy+radius*Math.sin((2*Math.PI*i)/data.entities.length)}));
+  edges=data.relations.map(e=>({...e}));
+  selected=null;
+  document.getElementById('dataNotice').textContent=kind==='real'?'Incarichi societari 2026 con fonti ufficiali. Nessun collegamento implica illeciti.':'Tutti i soggetti e collegamenti sono inventati.';
+  document.querySelector('.pill').textContent=kind==='real'?'ITALIA 2026 · FONTI UFFICIALI':'PROTOTIPO · DATI DIMOSTRATIVI';
+  render();
+ }catch(error){currentData=null;console.error(error);document.getElementById('dataNotice').textContent='Errore caricamento dataset: usa un server HTTP o GitHub Pages.';render()}
 }
+document.getElementById('dataset').addEventListener('change',loadDataset);
 loadDataset();
 </script>
 </body></html>
