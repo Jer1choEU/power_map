@@ -32,6 +32,8 @@ jobs:
           node-version: '22'
       - name: Verify EU publication safety
         run: node --test tests/eu-register.test.mjs
+      - name: Verify XML parser against synthetic records
+        run: python3 -m unittest discover -s tests -p 'test_eu_register.py' -v
       - name: Download and stream EU Transparency Register XML
         run: python3 scripts/import-eu-register.py
       - name: Validate official registrations
