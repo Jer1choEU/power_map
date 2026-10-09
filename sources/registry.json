@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "reviewed-official-records",
+      "adapter": "local-json",
+      "path": "sources/imports/reviewed.json",
+      "enabled": true,
+      "description": "Curated source exports; review and document evidence before entry."
+    }
+  ]
+}
