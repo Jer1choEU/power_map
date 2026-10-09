@@ -4,7 +4,11 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
-from scripts.anac_intake import get_header, inspect_archive, pick_resources, allowed_url
+import importlib.util
+spec = importlib.util.spec_from_file_location("anac_intake", Path(__file__).resolve().parents[1] / "scripts" / "anac-intake.py")
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+get_header, inspect_archive, pick_resources, allowed_url = module.get_header, module.inspect_archive, module.pick_resources, module.allowed_url
 
 class IntakeTests(unittest.TestCase):
     def test_picks_latest_and_rejects_untrusted_resources(self):
