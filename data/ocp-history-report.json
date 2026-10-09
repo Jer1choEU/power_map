@@ -1,0 +1,57 @@
+{
+  "years": {
+    "2020": {
+      "sha256": "4deb31853477ac3d2705a9e009d00dd7bd44db363feed7abaa6d963b6cedd8f7",
+      "rows": 41126,
+      "eligible": 17143,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2020.jsonl.gz"
+    },
+    "2021": {
+      "sha256": "b3a594699c35a38ee992cc5bee27f342fe850b19d432607c6cbab0a6cd1bb124",
+      "rows": 226138,
+      "eligible": 135640,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2021.jsonl.gz"
+    },
+    "2022": {
+      "sha256": "65ebdfae66c6910e19c2ed3595b57741b38ed905d066c22fa49570c7a508cc53",
+      "rows": 14067,
+      "eligible": 20115,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2022.jsonl.gz"
+    },
+    "2023": {
+      "sha256": "95efe30fa6979839a3c71a91a41cba284c8105087ab2391cefa358445eca881a",
+      "rows": 141632,
+      "eligible": 75411,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2023.jsonl.gz"
+    },
+    "2024": {
+      "sha256": "34a689ebaeece23d9835fe1ef0f3792cac3102b12870badaea7b7046ca8a6aaa",
+      "rows": 130494,
+      "eligible": 100318,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2024.jsonl.gz"
+    },
+    "2025": {
+      "sha256": "8169ab8e654bd6aae6c1cb00d3d8d8f3e8e63f4e765565e6f952b62575557350",
+      "rows": 9405,
+      "eligible": 10823,
+      "relations": 1200,
+      "sourceUrl": "https://fastly.data.open-contracting.org/downloads/italy_anac/4225/2025.jsonl.gz"
+    }
+  },
+  "yearCount": 6,
+  "archiveSetSHA256": "ea308894cc3a56d14ed4ec447f95836c8139cad5451426e60b6e7666eee7da98",
+  "entities": 5228,
+  "relations": 7200,
+  "duplicateAwards": 0,
+  "sourceUrl": "https://data.open-contracting.org/en/publication/117",
+  "unavailableYears": [
+    "2026"
+  ],
+  "automatic": true,
+  "qualityGate": "history-v1"
+}
