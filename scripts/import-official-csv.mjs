@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
-import path from 'node:path';
 const [,,kind,file,mappingFile]=process.argv;
 if(!['anac','eu-transparency'].includes(kind)||!file||!mappingFile)throw Error('Usage: node scripts/import-official-csv.mjs anac|eu-transparency input.csv mapping.json');
 const mapping=JSON.parse(await fs.readFile(mappingFile,'utf8'));
@@ -11,7 +10,7 @@ if(!allowed.includes(new URL(mapping.sourceUrl).hostname))throw Error('Source do
 function parseCSV(content,delimiter){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<content.length;i++){const c=content[i];if(c==='"'){if(quoted&&content[i+1]==='"'){field+='"';i++}else quoted=!quoted;}else if(c===delimiter&&!quoted){row.push(field);field=''}else if((c==='\n'||c==='\r'&&content[i+1]!=='\n')&&!quoted){row.push(field);field='';if(row.some(x=>x!==''))rows.push(row);row=[]}else if(c!=='\r'||quoted)field+=c;}if(quoted)throw Error('Unclosed CSV quote');if(field!==''||row.length){row.push(field);rows.push(row)}return rows}
 const text=(await fs.readFile(file,'utf8')).replace(/^\uFEFF/,'');const rows=parseCSV(text,mapping.delimiter??',');const header=rows.shift();if(!header)throw Error('Empty CSV');
 function get(row,key){const column=mapping.columns[key];if(!column)return '';const index=header.indexOf(column);if(index<0)throw Error('Missing column '+column);return (row[index]??'').trim()}
-const cleanId=s=>s.replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,100);
+const cleanId=s=>digest(s.trim().toUpperCase()).slice(0,16);
 const digest=s=>crypto.createHash('sha256').update(s).digest('hex').slice(0,16);
 const entities=new Map(), relations=[],errors=[];const sourceId='source:'+kind+':'+digest(mapping.sourceUrl+mapping.observedAt);
 for(let i=0;i<rows.length;i++){const row=rows[i];try{
