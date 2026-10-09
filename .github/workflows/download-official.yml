@@ -11,6 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: node --test tests/download.test.mjs
       - run: node scripts/download-official.mjs
       - uses: actions/upload-artifact@v4
         with:
