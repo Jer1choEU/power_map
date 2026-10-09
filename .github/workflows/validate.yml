@@ -9,7 +9,8 @@ on:
   pull_request:
     paths:
       - 'data/**'
-      - 'scripts/validate.mjs'
+      - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/validate.yml'
 jobs:
   validate:
@@ -22,3 +23,4 @@ jobs:
       - run: node scripts/validate.mjs data/demo.json
       - run: node scripts/validate.mjs data/italia-2026.json
       - run: node --test tests/*.test.mjs
+      - run: python3 -m unittest discover -s tests -p 'test_anac*.py' -v
