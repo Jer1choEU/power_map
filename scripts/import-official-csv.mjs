@@ -21,7 +21,7 @@ for(let i=0;i<rows.length;i++){const row=rows[i];try{
   const buyer='institution:anac:'+cleanId(buyerId),supplier='company:anac:'+cleanId(supplierId);
   entities.set(buyer,{id:buyer,name:buyerName,type:'istituzione',description:'Stazione appaltante da dataset ANAC; identificativo da verificare'});
   entities.set(supplier,{id:supplier,name:supplierName,type:'impresa',description:'Aggiudicatario da dataset ANAC; identificativo da verificare'});
-  relations.push({id:'rel:anac:'+cig+':'+digest(buyerId+'|'+supplierId),from:buyer,to:supplier,type:'collaborazione',label:'Aggiudicazione pubblica CIG '+cig,validFrom:null,validTo:null,sourceIds:[sourceId]});
+  relations.push({id:'rel:anac:'+cig+':'+digest(buyerId+'|'+supplierId),from:buyer,to:supplier,type:'aggiudicazione',label:'Aggiudicazione pubblica CIG '+cig,validFrom:null,validTo:null,sourceIds:[sourceId]});
  }else{
   const regId=get(row,'registrationId'),name=get(row,'name');if(!regId||!name)throw Error('Missing registration ID or organization name');
   const id='organization:eu-tr:'+cleanId(regId);
