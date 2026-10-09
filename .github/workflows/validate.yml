@@ -19,3 +19,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/validate.mjs data/demo.json
+      - run: node scripts/validate.mjs data/italia-2026.json
