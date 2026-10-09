@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-09",
+  "catalogs": [
+    {
+      "id": "anac-awards",
+      "name": "ANAC aggiudicazioni",
+      "url": "https://data.europa.eu/data/datasets/aggiudicazioni?locale=it",
+      "formatOptions": [
+        "CSV",
+        "JSON"
+      ],
+      "notes": "Monthly files vary in size; select and verify direct distributions before downloading."
+    },
+    {
+      "id": "anac-national",
+      "name": "ANAC open data portal",
+      "url": "https://www.anticorruzione.it/en/-/portale-dei-dati-aperti-dell-autorita-nazionale-anticorruzione",
+      "formatOptions": [
+        "CSV",
+        "JSON"
+      ],
+      "notes": "Official catalog, not a direct CSV endpoint."
+    },
+    {
+      "id": "eu-transparency",
+      "name": "EU Transparency Register",
+      "url": "https://data.europa.eu/data/datasets/transparency-register",
+      "formatOptions": [
+        "XML",
+        "XLS"
+      ],
+      "notes": "Daily organization exports; not a CSV feed, so requires format-specific parser."
+    }
+  ]
+}
