@@ -40,9 +40,10 @@ export function extractRelations(doc) {
  return result;
 }
 
-async function* readLines(opts){
+async function* readLines(opts,report){
  if(opts.fixture){
   const content=await fs.readFile(opts.fixture,'utf8');
+  report.archiveSha256=crypto.createHash('sha256').update(content).digest('hex');
   for(const line of content.split(/\r?\n/))if(line.trim())yield line;
   return;
  }
@@ -51,11 +52,12 @@ async function* readLines(opts){
  const response=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(120000),headers:{Accept:'application/gzip,application/octet-stream'}});
  if(!response.ok||!response.body)throw Error('Archive HTTP '+response.status);
  const cap=120*1024*1024, inflatedCap=900*1024*1024;
- let compressed=0,inflated=0;
- const limitedCompressed=new Transform({transform(chunk,enc,cb){compressed+=chunk.length;cb(compressed>cap?Error('Archive too large'):null,chunk)}});
+ let compressed=0,inflated=0;const compressedHash=crypto.createHash('sha256');
+ const limitedCompressed=new Transform({transform(chunk,enc,cb){compressed+=chunk.length;compressedHash.update(chunk);cb(compressed>cap?Error('Archive too large'):null,chunk)}});
  const limitedInflated=new Transform({transform(chunk,enc,cb){inflated+=chunk.length;cb(inflated>inflatedCap?Error('Inflated archive too large'):null,chunk)}});
  const stream=Readable.fromWeb(response.body).pipe(limitedCompressed).pipe(createGunzip()).pipe(limitedInflated);
  for await(const line of createInterface({input:stream,crlfDelay:Infinity}))if(line.trim())yield line;
+ report.archiveSha256=compressedHash.digest('hex');
 }
 export async function importOcp(options={}){
  const max=Number(options.maxRelations??1200);
@@ -63,7 +65,7 @@ export async function importOcp(options={}){
  const sources=[{id:'source:ocp-anac',title:'ANAC procurement OCDS archive '+(options.year||'fixture')+' (Open Contracting Partnership, CC BY 4.0)',publisher:'Open Contracting Partnership / ANAC',url:'https://data.open-contracting.org/en/publication/117',accessedAt:options.asOf||new Date().toISOString().slice(0,10)}];
  const entities=new Map(),relations=new Map();
  const report={year:options.year||'fixture',rows:0,malformedRows:0,skippedRows:0,eligibleRelations:0,limited:false,conflictingNames:0,source:sources[0].url};
- for await(const line of readLines(options)){
+ for await(const line of readLines(options,report)){
   report.rows++;
   let doc;try{doc=JSON.parse(line)}catch{report.malformedRows++;continue}
   const valid=extractRelations(doc);
