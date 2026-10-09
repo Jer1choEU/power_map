@@ -3,7 +3,8 @@ on:
   push:
     paths:
       - 'data/**'
-      - 'scripts/validate.mjs'
+      - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/validate.yml'
   pull_request:
     paths:
@@ -20,3 +21,4 @@ jobs:
           node-version: '22'
       - run: node scripts/validate.mjs data/demo.json
       - run: node scripts/validate.mjs data/italia-2026.json
+      - run: node --test tests/*.test.mjs
