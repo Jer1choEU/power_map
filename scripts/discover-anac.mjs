@@ -6,8 +6,8 @@ const allowed=new Set(['dati.anticorruzione.it','www.anticorruzione.it','anticor
 for(const id of packages){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
  try{
-  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','User-Agent':'Mozilla/5.0 (compatible; PowerMap/0.4; +https://github.com/Jer1choEU/power_map)'},body:JSON.stringify({id}),signal:controller.signal,redirect:'manual'});
-  if(!response.ok)throw Error('HTTP '+response.status);
+  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json, text/plain, */*','Accept-Language':'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7','User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36','Referer':'https://dati.anticorruzione.it/opendata/dataset/'},body:JSON.stringify({id}),signal:controller.signal,redirect:'manual'});
+  if(!response.ok)throw Error('HTTP '+response.status+' '+(await response.text()).slice(0,180));
   const body=await response.json();
   if(body.success!==true||!Array.isArray(body.result?.resources))throw Error('Invalid CKAN response');
   const resources=body.result.resources.flatMap(r=>{
@@ -20,7 +20,7 @@ for(const id of packages){
    return [{id:r.id,name:r.name,format,isCsv,isZip,url:url.href,size:r.size??null,lastModified:r.last_modified??null}];
   });
   output.push({package:id,status:'ok',resources});
- }catch(e){output.push({package:id,status:'error',error:String(e)})}
+ }catch(e){console.error(id+': '+String(e));output.push({package:id,status:'error',error:String(e)})}
  finally{clearTimeout(timer)}
 }
 await fs.mkdir('build',{recursive:true});
