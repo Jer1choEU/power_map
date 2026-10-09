@@ -1,7 +1,7 @@
 # Fonti e regole per Power Map
 
 ## Stato
-Il prototipo visualizza ancora dati demo incorporati in `index.html`. `data/demo.json` introduce il formato strutturato che alimenterà il futuro grafo; non è ancora connesso all'interfaccia.
+L'interfaccia permette di scegliere tra `data/demo.json` (inventato) e `data/italia-2026.json` (incarichi pubblicati da Enel, Eni e Terna). Ogni incarico del dataset reale rimanda alla pagina ufficiale da cui proviene. Le date di inizio sono riferite alle nomine del maggio 2026; la fine non è ancora accertata e viene rappresentata come `null`.
 
 ## Fonti candidate (da verificare prima di qualsiasi import)
 - Registro delle Imprese / InfoCamere: visure, amministratori e assetti; controllare accessibilità e licenze.
