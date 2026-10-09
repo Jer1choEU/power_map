@@ -86,6 +86,30 @@
       "name": "Romano Minozzi",
       "type": "persona",
       "description": "Soggetto presente nelle comunicazioni societarie ufficiali."
+    },
+    {
+      "id": "company:state-grid-europe",
+      "name": "State Grid Europe Limited",
+      "type": "impresa",
+      "description": "Soggetto documentato nella pagina ufficiale CDP Reti."
+    },
+    {
+      "id": "company:state-grid-corporation",
+      "name": "State Grid Corporation of China",
+      "type": "impresa",
+      "description": "Soggetto documentato nella pagina ufficiale CDP Reti."
+    },
+    {
+      "id": "company:snam",
+      "name": "Snam S.p.A.",
+      "type": "impresa",
+      "description": "Soggetto documentato nella pagina ufficiale CDP Reti."
+    },
+    {
+      "id": "company:italgas",
+      "name": "Italgas S.p.A.",
+      "type": "impresa",
+      "description": "Soggetto documentato nella pagina ufficiale CDP Reti."
     }
   ],
   "sources": [
@@ -129,6 +153,13 @@
       "title": "Enel – Relazione annuale 2025, composizione azionaria al 31 dicembre 2025",
       "url": "https://www.enel.com/content/dam/enel-com/documenti/investitori/Integrated-Annual-Report2025-04update.pdf",
       "publisher": "Enel",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:cdp-reti-2026",
+      "title": "CDP Reti – proprietà e partecipazioni, dati al 30 giugno 2026",
+      "publisher": "Cassa Depositi e Prestiti",
+      "url": "https://www.cdp.it/sitointernet/it/cdp_reti.page",
       "accessedAt": "2026-10-09"
     }
   ],
@@ -302,15 +333,63 @@
       ]
     },
     {
-      "id": "rel:ownership:cdp-cdpreti",
+      "id": "rel:ownership:cdp-cdp-reti",
       "from": "company:cdp",
       "to": "company:cdp-reti",
       "type": "partecipazione",
-      "label": "Controllante di CDP Reti (quota non specificata nella fonte)",
+      "label": "59,1% CDP Reti",
       "validFrom": null,
       "validTo": null,
       "sourceIds": [
-        "source:terna-ownership"
+        "source:cdp-reti-2026"
+      ]
+    },
+    {
+      "id": "rel:ownership:sge-cdp-reti",
+      "from": "company:state-grid-europe",
+      "to": "company:cdp-reti",
+      "type": "partecipazione",
+      "label": "35% CDP Reti",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:cdp-reti-2026"
+      ]
+    },
+    {
+      "id": "rel:ownership:cdpreti-snam",
+      "from": "company:cdp-reti",
+      "to": "company:snam",
+      "type": "partecipazione",
+      "label": "31,35% Snam (30/06/2026)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:cdp-reti-2026"
+      ]
+    },
+    {
+      "id": "rel:ownership:cdpreti-italgas",
+      "from": "company:cdp-reti",
+      "to": "company:italgas",
+      "type": "partecipazione",
+      "label": "25,91% Italgas (30/06/2026)",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:cdp-reti-2026"
+      ]
+    },
+    {
+      "id": "rel:ownership:sge-sgc",
+      "from": "company:state-grid-corporation",
+      "to": "company:state-grid-europe",
+      "type": "partecipazione",
+      "label": "Società del gruppo State Grid Corporation of China",
+      "validFrom": null,
+      "validTo": null,
+      "sourceIds": [
+        "source:cdp-reti-2026"
       ]
     }
   ]
