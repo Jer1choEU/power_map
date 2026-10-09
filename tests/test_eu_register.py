@@ -29,7 +29,7 @@ class EURegistryTests(unittest.TestCase):
             data,report=eu.parse_export(f,strict=False)
             self.assertEqual(report["globalRegistrations"],2)
             self.assertEqual(report["italianOrganizations"],1)
-            self.assertEqual(data["entities"][0]["type"],"organizzazione")
+            self.assertEqual(sum(e["type"]=="organizzazione" for e in data["entities"]),1)
             self.assertEqual(len(data["relations"]),1)
             self.assertEqual(data["relations"][0]["eventDate"],"2020-01-10")
             self.assertEqual(data["relations"][0]["type"],"iscrizione")
