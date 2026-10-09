@@ -5,7 +5,7 @@ import {createInterface} from 'node:readline';
 import crypto from 'node:crypto';
 import path from 'node:path';
 
-const DOWNLOAD_BASE='https://fastly.data.open-contracting.org/downloads/italy_anac/4225/';
+const PUBLIC_DOWNLOAD='https://data.open-contracting.org/en/publication/117/download?name=';
 const ALLOWED_YEARS=new Set(['2020','2021','2022','2023','2024','2025']);
 const isTaxId=id=>/^[0-9]{11}$/.test(String(id??''));
 const isCig=id=>/^[A-Za-z0-9]{10}$/.test(String(id??''));
@@ -48,8 +48,15 @@ async function* readLines(opts,report){
   return;
  }
  if(!ALLOWED_YEARS.has(opts.year))throw Error('Year not allowlisted');
- const url=DOWNLOAD_BASE+opts.year+'.jsonl.gz';
- const response=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(120000),headers:{Accept:'application/gzip,application/octet-stream'}});
+ const url=PUBLIC_DOWNLOAD+opts.year+'.jsonl.gz';
+ const redirect=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(30000)});
+ if(![301,302,303,307,308].includes(redirect.status))throw Error('Expected OCP archive redirect, got HTTP '+redirect.status);
+ const location=redirect.headers.get('location');
+ if(!location)throw Error('Missing archive redirect location');
+ const target=new URL(location,url);
+ if(target.protocol!=='https:'||target.hostname!=='fastly.data.open-contracting.org'||!target.pathname.startsWith('/downloads/italy_anac/')||!target.pathname.endsWith('/'+opts.year+'.jsonl.gz'))throw Error('Untrusted OCP archive redirect');
+ report.resolvedArchiveUrl=target.href;
+ const response=await fetch(target.href,{redirect:'manual',signal:AbortSignal.timeout(120000),headers:{Accept:'application/gzip,application/octet-stream'}});
  if(!response.ok||!response.body)throw Error('Archive HTTP '+response.status);
  const cap=120*1024*1024, inflatedCap=900*1024*1024;
  let compressed=0,inflated=0;const compressedHash=crypto.createHash('sha256');
