@@ -9,7 +9,7 @@ const config=JSON.parse(await fs.readFile('sources/discovery-seeds.json','utf8')
 const results=[], errors=[];
 const max=Math.min(Number(process.env.MAX_COMPANIES||5),10);
 for(const seed of config.companies.slice(0,max)){
-  if(seed.jurisdiction_code!=='it'||!/^\\d{5,}$/.test(seed.company_number)){
+  if(seed.jurisdiction_code!=='it'||! /^[0-9]{5,}$/.test(seed.company_number)){
     errors.push({seed,error:'Require exact Italian company number and jurisdiction; no fuzzy matching'});continue;
   }
   const endpoint='https://api.opencorporates.com/v0.4/companies/'+encodeURIComponent(seed.jurisdiction_code)+'/'+encodeURIComponent(seed.company_number);
