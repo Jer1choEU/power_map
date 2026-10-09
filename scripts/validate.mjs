@@ -13,7 +13,7 @@ for(const s of data.sources){if(!s.title?.trim()||!datesOk(s.accessedAt))fail('F
 for(const r of data.relations){
 if(!entities.has(r.from)||!entities.has(r.to))fail('Entità sconosciuta nella relazione '+r.id);
 if(!['incarico','partecipazione','collaborazione','aggiudicazione'].includes(r.type))fail('Tipo non valido: '+r.id);
-if(!datesOk(r.validFrom)||!datesOk(r.validTo)||r.validFrom&&r.validTo&&r.validFrom>r.validTo)fail('Periodo non valido: '+r.id);
+if(!datesOk(r.validFrom)||!datesOk(r.validTo)||('eventDate' in r&&!datesOk(r.eventDate))||r.validFrom&&r.validTo&&r.validFrom>r.validTo)fail('Periodo non valido: '+r.id);
 if(!Array.isArray(r.sourceIds)||r.sourceIds.some(id=>!sources.has(id)))fail('Fonte inesistente: '+r.id);
 if(data.mode==='real'&&r.sourceIds.length===0)fail('Relazione reale senza fonte: '+r.id);
 }
