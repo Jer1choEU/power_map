@@ -1,0 +1,22 @@
+name: Graph coverage
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+      - '.github/workflows/coverage.yml'
+  workflow_dispatch:
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate.mjs data/italia-2026.json
+      - run: node scripts/coverage.mjs data/italia-2026.json > coverage.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: power-map-coverage
+          path: coverage.md
