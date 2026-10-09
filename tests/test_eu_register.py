@@ -9,6 +9,11 @@ eu=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(eu)
 
 class EURegistryTests(unittest.TestCase):
+    def test_invalid_xml_reference_sanitizer(self):
+        safe,count=eu.clean_xml_bytes(b'<x>A&#x0;B&#11;C&#x1F;D&#x20;E</x>')
+        self.assertEqual(count,3)
+        self.assertIn(b'A?B?C?D&#x20;E',safe)
+
     def test_only_italian_organizations_are_published(self):
         content="""<?xml version='1.1' encoding='UTF-8'?>
 <ListOfIRPublicDetail xmlns="http://intragate.ec.europa.eu/transparencyregister/odp">
