@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "mode": "real",
+  "updatedAt": "2026-10-09",
+  "entities": [
+    {
+      "id": "company:enel",
+      "name": "Enel S.p.A.",
+      "type": "impresa",
+      "description": "Società quotata italiana."
+    },
+    {
+      "id": "company:eni",
+      "name": "Eni S.p.A.",
+      "type": "impresa",
+      "description": "Società quotata italiana."
+    },
+    {
+      "id": "company:terna",
+      "name": "Terna S.p.A.",
+      "type": "impresa",
+      "description": "Società quotata italiana."
+    },
+    {
+      "id": "person:paolo-scaroni",
+      "name": "Paolo Scaroni",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "person:flavio-cattaneo",
+      "name": "Flavio Cattaneo",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "person:giuseppina-di-foggia",
+      "name": "Giuseppina Di Foggia",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "person:claudio-descalzi",
+      "name": "Claudio Descalzi",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "person:stefano-cuzzilla",
+      "name": "Stefano Cuzzilla",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    },
+    {
+      "id": "person:pasqualino-monti",
+      "name": "Pasqualino Monti",
+      "type": "persona",
+      "description": "Incarico societario documentato da fonte ufficiale."
+    }
+  ],
+  "sources": [
+    {
+      "id": "source:enel",
+      "title": "Enel - Consiglio di amministrazione",
+      "url": "https://www.enel.com/it/investitori/governance/consiglio-amministrazione",
+      "publisher": "ENEL",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:eni",
+      "title": "Eni - Board of Directors",
+      "url": "https://www.eni.com/en-IT/governance/corporate-bodies/board-directors.html",
+      "publisher": "ENI",
+      "accessedAt": "2026-10-09"
+    },
+    {
+      "id": "source:terna",
+      "title": "Terna - Consiglio di amministrazione",
+      "url": "https://www.terna.it/it/Governance/consiglio-amministrazione",
+      "publisher": "TERNA",
+      "accessedAt": "2026-10-09"
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel:governance:001",
+      "from": "person:paolo-scaroni",
+      "to": "company:enel",
+      "type": "incarico",
+      "label": "Presidente",
+      "validFrom": "2026-05-12",
+      "validTo": null,
+      "sourceIds": [
+        "source:enel"
+      ]
+    },
+    {
+      "id": "rel:governance:002",
+      "from": "person:flavio-cattaneo",
+      "to": "company:enel",
+      "type": "incarico",
+      "label": "Amministratore delegato",
+      "validFrom": "2026-05-12",
+      "validTo": null,
+      "sourceIds": [
+        "source:enel"
+      ]
+    },
+    {
+      "id": "rel:governance:003",
+      "from": "person:giuseppina-di-foggia",
+      "to": "company:eni",
+      "type": "incarico",
+      "label": "Presidente",
+      "validFrom": "2026-05-07",
+      "validTo": null,
+      "sourceIds": [
+        "source:eni"
+      ]
+    },
+    {
+      "id": "rel:governance:004",
+      "from": "person:claudio-descalzi",
+      "to": "company:eni",
+      "type": "incarico",
+      "label": "Amministratore delegato",
+      "validFrom": "2026-05-07",
+      "validTo": null,
+      "sourceIds": [
+        "source:eni"
+      ]
+    },
+    {
+      "id": "rel:governance:005",
+      "from": "person:stefano-cuzzilla",
+      "to": "company:terna",
+      "type": "incarico",
+      "label": "Presidente",
+      "validFrom": "2026-05-12",
+      "validTo": null,
+      "sourceIds": [
+        "source:terna"
+      ]
+    },
+    {
+      "id": "rel:governance:006",
+      "from": "person:pasqualino-monti",
+      "to": "company:terna",
+      "type": "incarico",
+      "label": "Amministratore delegato e direttore generale",
+      "validFrom": "2026-05-12",
+      "validTo": null,
+      "sourceIds": [
+        "source:terna"
+      ]
+    }
+  ]
+}
