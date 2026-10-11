@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-11",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -4396,12 +4396,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:632551951456-94",
-      "name": "Atlante srl",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:634404096479-22",
       "name": "Radici Partecipazioni Spa",
       "type": "organizzazione",
@@ -6934,8 +6928,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-09",
-      "publishedAt": "2026-10-09"
+      "accessedAt": "2026-10-11",
+      "publishedAt": "2026-10-10"
     }
   ],
   "relations": [
@@ -16437,19 +16431,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-06-15",
       "validFrom": "2026-06-15",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:632551951456-94",
-      "from": "eu-tr:organization:632551951456-94",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2023-10-23",
-      "validFrom": "2023-10-23",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
