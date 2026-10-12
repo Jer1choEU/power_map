@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -4534,12 +4534,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:653355443298-30",
-      "name": "CONAPI SOC. COOP. AGRICOLA",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:653459650464-05",
       "name": "Osservatorio sulla criminalità nell'agricoltura e sul sistema agroalimentare",
       "type": "organizzazione",
@@ -6928,8 +6922,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-11",
-      "publishedAt": "2026-10-10"
+      "accessedAt": "2026-10-12",
+      "publishedAt": "2026-10-11"
     }
   ],
   "relations": [
@@ -16730,19 +16724,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2015-07-08",
       "validFrom": "2015-07-08",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:653355443298-30",
-      "from": "eu-tr:organization:653355443298-30",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2021-06-23",
-      "validFrom": "2021-06-23",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
