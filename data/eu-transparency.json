@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-14",
+  "updatedAt": "2026-10-15",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -654,6 +654,12 @@
     {
       "id": "eu-tr:organization:095079912436-63",
       "name": "FINCANTIERI SpA",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:095081595373-70",
+      "name": "TEHA Group S.p.A.",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -2722,6 +2728,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:3947014106714-18",
+      "name": "Altera APS",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:3962400101389-17",
       "name": "Associazione Nazionale Dentisti Italiani",
       "type": "organizzazione",
@@ -2878,6 +2890,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:4201457106717-25",
+      "name": "Opera for Peace",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:42122398878-52",
       "name": "Confederazione Nazionale dell'Artigianato e della Piccola e Media Impresa",
       "type": "organizzazione",
@@ -2928,12 +2946,6 @@
     {
       "id": "eu-tr:organization:4258049103733-13",
       "name": "Azienda Speciale A.Co.S. - Agenzia per il controllo e la qualità dei servizi pubblici locali e strumentali di Roma Capitale",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:425914796689-80",
-      "name": "Project s.a.s. di Massimo Perucca",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -4404,6 +4416,12 @@
     {
       "id": "eu-tr:organization:6319757105150-39",
       "name": "South Alliance for Transplants",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:632551951456-94",
+      "name": "Atlante srl",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6940,8 +6958,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-14",
-      "publishedAt": "2026-10-13"
+      "accessedAt": "2026-10-15",
+      "publishedAt": "2026-10-14"
     }
   ],
   "relations": [
@@ -8344,6 +8362,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2013-12-13",
       "validFrom": "2013-12-13",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:095081595373-70",
+      "from": "eu-tr:organization:095081595373-70",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2025-01-07",
+      "validFrom": "2025-01-07",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -12822,6 +12853,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:3947014106714-18",
+      "from": "eu-tr:organization:3947014106714-18",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-06",
+      "validFrom": "2026-10-06",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:3962400101389-17",
       "from": "eu-tr:organization:3962400101389-17",
       "to": "eu-tr:institution:transparency-register",
@@ -13160,6 +13204,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:4201457106717-25",
+      "from": "eu-tr:organization:4201457106717-25",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-06",
+      "validFrom": "2026-10-06",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:42122398878-52",
       "from": "eu-tr:organization:42122398878-52",
       "to": "eu-tr:institution:transparency-register",
@@ -13271,19 +13328,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-04-16",
       "validFrom": "2026-04-16",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:425914796689-80",
-      "from": "eu-tr:organization:425914796689-80",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-02-24",
-      "validFrom": "2025-02-24",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -16469,6 +16513,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-06-15",
       "validFrom": "2026-06-15",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:632551951456-94",
+      "from": "eu-tr:organization:632551951456-94",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2023-10-23",
+      "validFrom": "2023-10-23",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
