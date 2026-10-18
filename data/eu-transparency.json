@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-18",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -3694,12 +3694,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:5321104100821-89",
-      "name": "Consorzio Mercato Centrale",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:532112149350-36",
       "name": "LEGACOOP AGROALIMENTARE - Associazione Nazionale delle Cooperative Agroitticoalimentari per lo Sviluppo Rurale e Costiero",
       "type": "organizzazione",
@@ -4920,12 +4914,6 @@
     {
       "id": "eu-tr:organization:695023821930-81",
       "name": "Ferrari",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:6956330100815-07",
-      "name": "All About Water",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6964,8 +6952,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-17",
-      "publishedAt": "2026-10-16"
+      "accessedAt": "2026-10-18",
+      "publishedAt": "2026-10-17"
     }
   ],
   "relations": [
@@ -14952,19 +14940,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:5321104100821-89",
-      "from": "eu-tr:organization:5321104100821-89",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-07",
-      "validFrom": "2025-10-07",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:532112149350-36",
       "from": "eu-tr:organization:532112149350-36",
       "to": "eu-tr:institution:transparency-register",
@@ -17611,19 +17586,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2016-05-25",
       "validFrom": "2016-05-25",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:6956330100815-07",
-      "from": "eu-tr:organization:6956330100815-07",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-01",
-      "validFrom": "2025-10-01",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
