@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-20",
+  "updatedAt": "2026-10-21",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -606,6 +606,12 @@
     {
       "id": "eu-tr:organization:082690649605-19",
       "name": "Wind Tre s.p.a.",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:0829001106849-02",
+      "name": "Unionplast - Unione Nazionale Industrie Trasformatrici Materie Plastiche",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6784,6 +6790,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:9795086106848-09",
+      "name": "Frati Minori D'Europa",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:980843995893-26",
       "name": "3Bee",
       "type": "organizzazione",
@@ -6952,8 +6964,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-20",
-      "publishedAt": "2026-10-19"
+      "accessedAt": "2026-10-21",
+      "publishedAt": "2026-10-20"
     }
   ],
   "relations": [
@@ -8252,6 +8264,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2023-03-28",
       "validFrom": "2023-03-28",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:0829001106849-02",
+      "from": "eu-tr:organization:0829001106849-02",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-14",
+      "validFrom": "2026-10-14",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -21629,6 +21654,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2025-01-28",
       "validFrom": "2025-01-28",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:9795086106848-09",
+      "from": "eu-tr:organization:9795086106848-09",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-09-19",
+      "validFrom": "2026-09-19",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
