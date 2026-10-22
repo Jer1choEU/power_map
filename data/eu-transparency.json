@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-21",
+  "updatedAt": "2026-10-22",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -1072,6 +1072,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:142820199314-96",
+      "name": "Trust-IT Services",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:1429570102474-05",
       "name": "CERIC ERIC",
       "type": "organizzazione",
@@ -2136,6 +2142,12 @@
     {
       "id": "eu-tr:organization:304964834600-54",
       "name": "Fondazione Altagamma",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:3050871106877-63",
+      "name": "Fondazione nazionale degli Assistenti sociali",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6964,8 +6976,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-21",
-      "publishedAt": "2026-10-20"
+      "accessedAt": "2026-10-22",
+      "publishedAt": "2026-10-21"
     }
   ],
   "relations": [
@@ -9265,6 +9277,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-04-01",
       "validFrom": "2026-04-01",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:142820199314-96",
+      "from": "eu-tr:organization:142820199314-96",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2025-06-03",
+      "validFrom": "2025-06-03",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -11579,6 +11604,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2019-04-15",
       "validFrom": "2019-04-15",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:3050871106877-63",
+      "from": "eu-tr:organization:3050871106877-63",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-21",
+      "validFrom": "2026-10-21",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
