@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-22",
+  "updatedAt": "2026-10-23",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -4036,6 +4036,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:5806146106914-15",
+      "name": "Kopjra S.r.l.",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:580978252789-28",
       "name": "GEKO S.p.A",
       "type": "organizzazione",
@@ -4254,12 +4260,6 @@
     {
       "id": "eu-tr:organization:6112270101273-59",
       "name": "EIS 2050",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:6122035100871-23",
-      "name": "AUSONIA FILM",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6976,8 +6976,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-22",
-      "publishedAt": "2026-10-21"
+      "accessedAt": "2026-10-23",
+      "publishedAt": "2026-10-22"
     }
   ],
   "relations": [
@@ -15705,6 +15705,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:5806146106914-15",
+      "from": "eu-tr:organization:5806146106914-15",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-22",
+      "validFrom": "2026-10-22",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:580978252789-28",
       "from": "eu-tr:organization:580978252789-28",
       "to": "eu-tr:institution:transparency-register",
@@ -16180,19 +16193,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2025-11-12",
       "validFrom": "2025-11-12",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:6122035100871-23",
-      "from": "eu-tr:organization:6122035100871-23",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-15",
-      "validFrom": "2025-10-15",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
