@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-25",
+  "updatedAt": "2026-10-26",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -5032,12 +5032,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:7152053100946-68",
-      "name": "Viaggiare Informati Camperisti APS",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:715505150890-62",
       "name": "Regenerative tourism professional network",
       "type": "organizzazione",
@@ -6952,8 +6946,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-25",
-      "publishedAt": "2026-10-24"
+      "accessedAt": "2026-10-26",
+      "publishedAt": "2026-10-25"
     }
   ],
   "relations": [
@@ -17833,19 +17827,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2025-11-12",
       "validFrom": "2025-11-12",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:7152053100946-68",
-      "from": "eu-tr:organization:7152053100946-68",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-22",
-      "validFrom": "2025-10-22",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
