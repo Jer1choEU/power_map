@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-10-28",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -2940,6 +2940,12 @@
     {
       "id": "eu-tr:organization:4240323104262-10",
       "name": "ST SRL",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:4248329106982-79",
+      "name": "Unità Nazionale Sindacato Popolo d'Italia",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6952,8 +6958,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-27",
-      "publishedAt": "2026-10-26"
+      "accessedAt": "2026-10-28",
+      "publishedAt": "2026-10-27"
     }
   ],
   "relations": [
@@ -13309,6 +13315,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-05-11",
       "validFrom": "2026-05-11",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:4248329106982-79",
+      "from": "eu-tr:organization:4248329106982-79",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-07-19",
+      "validFrom": "2026-07-19",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
