@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-28",
+  "updatedAt": "2026-10-29",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -6958,8 +6958,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-28",
-      "publishedAt": "2026-10-27"
+      "accessedAt": "2026-10-29",
+      "publishedAt": "2026-10-28"
     }
   ],
   "relations": [
