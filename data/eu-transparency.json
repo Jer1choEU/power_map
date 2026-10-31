@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-30",
+  "updatedAt": "2026-10-31",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -5224,12 +5224,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:7493035101003-43",
-      "name": "Fondazione Marisa Bellisario",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:750333252303-50",
       "name": "Consorzio Nazionale per la Raccolta il Riciclo e il Recupero degli imballaggi in plastica",
       "type": "organizzazione",
@@ -6958,8 +6952,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-30",
-      "publishedAt": "2026-10-29"
+      "accessedAt": "2026-10-31",
+      "publishedAt": "2026-10-30"
     }
   ],
   "relations": [
@@ -18255,19 +18249,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2021-10-08",
       "validFrom": "2021-10-08",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:7493035101003-43",
-      "from": "eu-tr:organization:7493035101003-43",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-23",
-      "validFrom": "2025-10-23",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
