@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-10-31",
+  "updatedAt": "2026-11-01",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -156,12 +156,6 @@
     {
       "id": "eu-tr:organization:01936914624-97",
       "name": "Slow Food",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:019532641538-92",
-      "name": "confindustria ceramica",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -2698,12 +2692,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:3876942101065-70",
-      "name": "Diano Cementi S.p.a.",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:387739026559-34",
       "name": "TYVAK INTERNATIONAL SRL",
       "type": "organizzazione",
@@ -4990,12 +4978,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:7059382101049-58",
-      "name": "Panetta & Associati Studio Legale",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:7064868104024-82",
       "name": "Haizum Strategic Government Affairs Srl",
       "type": "organizzazione",
@@ -5016,12 +4998,6 @@
     {
       "id": "eu-tr:organization:7103077103619-53",
       "name": "ARNOLDO MONDADORI EDITORE S.p.A.",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:710588552404-80",
-      "name": "MONDADORI MEDIA S.P.A.",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6952,8 +6928,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-10-31",
-      "publishedAt": "2026-10-30"
+      "accessedAt": "2026-11-01",
+      "publishedAt": "2026-10-31"
     }
   ],
   "relations": [
@@ -7277,19 +7253,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2010-11-29",
       "validFrom": "2010-11-29",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:019532641538-92",
-      "from": "eu-tr:organization:019532641538-92",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2021-02-23",
-      "validFrom": "2021-02-23",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -12782,19 +12745,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:3876942101065-70",
-      "from": "eu-tr:organization:3876942101065-70",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-29",
-      "validFrom": "2025-10-29",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:387739026559-34",
       "from": "eu-tr:organization:387739026559-34",
       "to": "eu-tr:institution:transparency-register",
@@ -17748,19 +17698,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:7059382101049-58",
-      "from": "eu-tr:organization:7059382101049-58",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-10-17",
-      "validFrom": "2025-10-17",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:7064868104024-82",
       "from": "eu-tr:organization:7064868104024-82",
       "to": "eu-tr:institution:transparency-register",
@@ -17807,19 +17744,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-04-23",
       "validFrom": "2026-04-23",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:710588552404-80",
-      "from": "eu-tr:organization:710588552404-80",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2024-01-08",
-      "validFrom": "2024-01-08",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
