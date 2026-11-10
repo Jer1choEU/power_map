@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-09",
+  "updatedAt": "2026-11-10",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -922,6 +922,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:1279514107189-43",
+      "name": "ASSORUP APS - ETS",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:1288300106455-38",
       "name": "Mandragola Editrice s.c.g.",
       "type": "organizzazione",
@@ -1722,6 +1728,12 @@
     {
       "id": "eu-tr:organization:2518040103805-76",
       "name": "Pontificia Accademia per la Vita",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:2518516107191-27",
+      "name": "Gruppoleonardo",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6982,7 +6994,7 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-09",
+      "accessedAt": "2026-11-10",
       "publishedAt": "2026-11-09"
     }
   ],
@@ -8964,6 +8976,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:1279514107189-43",
+      "from": "eu-tr:organization:1279514107189-43",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-07",
+      "validFrom": "2026-11-07",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:1288300106455-38",
       "from": "eu-tr:organization:1288300106455-38",
       "to": "eu-tr:institution:transparency-register",
@@ -10700,6 +10725,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-05-04",
       "validFrom": "2026-05-04",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:2518516107191-27",
+      "from": "eu-tr:organization:2518516107191-27",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-10-13",
+      "validFrom": "2026-10-13",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
