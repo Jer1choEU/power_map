@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-10",
+  "updatedAt": "2026-11-11",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -886,6 +886,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:1218578107217-62",
+      "name": "FONDAZIONE ECOSISTEMI",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:122186752144-28",
       "name": "Associazione Eurota ETS",
       "type": "organizzazione",
@@ -924,6 +930,12 @@
     {
       "id": "eu-tr:organization:1279514107189-43",
       "name": "ASSORUP APS - ETS",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:1287385107213-08",
+      "name": "ASSIMEFAC",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -1668,6 +1680,12 @@
     {
       "id": "eu-tr:organization:234305412738-21",
       "name": "Nexa Center for Internet & Society",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:2345038107208-55",
+      "name": "Coop Italia",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -2916,6 +2934,12 @@
     {
       "id": "eu-tr:organization:42122398878-52",
       "name": "Confederazione Nazionale dell'Artigianato e della Piccola e Media Impresa",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:421342026894-11",
+      "name": "ARCHES Centro di Ricerca Avanzata per la Salute, l'Ambiente e lo Spazio",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -6994,8 +7018,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-10",
-      "publishedAt": "2026-11-09"
+      "accessedAt": "2026-11-11",
+      "publishedAt": "2026-11-10"
     }
   ],
   "relations": [
@@ -8898,6 +8922,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:1218578107217-62",
+      "from": "eu-tr:organization:1218578107217-62",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-10",
+      "validFrom": "2026-11-10",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:122186752144-28",
       "from": "eu-tr:organization:122186752144-28",
       "to": "eu-tr:institution:transparency-register",
@@ -8983,6 +9020,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-11-07",
       "validFrom": "2026-11-07",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:1287385107213-08",
+      "from": "eu-tr:organization:1287385107213-08",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-10",
+      "validFrom": "2026-11-10",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -10595,6 +10645,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2014-01-27",
       "validFrom": "2014-01-27",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:2345038107208-55",
+      "from": "eu-tr:organization:2345038107208-55",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-04",
+      "validFrom": "2026-11-04",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -13299,6 +13362,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2012-05-31",
       "validFrom": "2012-05-31",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:421342026894-11",
+      "from": "eu-tr:organization:421342026894-11",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2017-04-24",
+      "validFrom": "2017-04-24",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
