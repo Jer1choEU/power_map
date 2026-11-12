@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-12",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -190,12 +190,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:0248816102284-64",
-      "name": "Secofind sim",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:025290351799-03",
       "name": "Associazione Giovani Iraniani in Italia",
       "type": "organizzazione",
@@ -222,12 +216,6 @@
     {
       "id": "eu-tr:organization:027431725049-88",
       "name": "Istituto Nazionale Tributaristi",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:028417242258-15",
-      "name": "IBMA ITALY",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -1132,12 +1120,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:149299896981-29",
-      "name": "Associazione Nazionale Imprese Trasporto Viaggatori",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:149483798353-21",
       "name": "FASI.biz EU Media SRL",
       "type": "organizzazione",
@@ -1194,6 +1176,12 @@
     {
       "id": "eu-tr:organization:1576111101599-19",
       "name": "NIULINX S.p.A.",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:1591278101083-62",
+      "name": "I.BLU",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -7018,8 +7006,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-11",
-      "publishedAt": "2026-11-10"
+      "accessedAt": "2026-11-12",
+      "publishedAt": "2026-11-11"
     }
   ],
   "relations": [
@@ -7414,19 +7402,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:0248816102284-64",
-      "from": "eu-tr:organization:0248816102284-64",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2026-01-20",
-      "validFrom": "2026-01-20",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:025290351799-03",
       "from": "eu-tr:organization:025290351799-03",
       "to": "eu-tr:institution:transparency-register",
@@ -7486,19 +7461,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2016-12-13",
       "validFrom": "2016-12-13",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:028417242258-15",
-      "from": "eu-tr:organization:028417242258-15",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2021-04-12",
-      "validFrom": "2021-04-12",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -9455,19 +9417,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:149299896981-29",
-      "from": "eu-tr:organization:149299896981-29",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-03-13",
-      "validFrom": "2025-03-13",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:149483798353-21",
       "from": "eu-tr:organization:149483798353-21",
       "to": "eu-tr:institution:transparency-register",
@@ -9592,6 +9541,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2025-11-28",
       "validFrom": "2025-11-28",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:1591278101083-62",
+      "from": "eu-tr:organization:1591278101083-62",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2025-10-29",
+      "validFrom": "2025-10-29",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
