@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -186,6 +186,12 @@
     {
       "id": "eu-tr:organization:0248492105868-73",
       "name": "Unione Donne Italiane e Kurde",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:0248816102284-64",
+      "name": "Secofind sim",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -2724,6 +2730,12 @@
     {
       "id": "eu-tr:organization:387674033257-12",
       "name": "Mind the Bridge",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:3876942101065-70",
+      "name": "Diano Cementi S.p.a.",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -5566,6 +5578,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:7978291107264-42",
+      "name": "Mediterranean Transmission System Operators",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:7983529103902-08",
       "name": "Iranian Graduates Association",
       "type": "organizzazione",
@@ -7024,8 +7042,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-13",
-      "publishedAt": "2026-11-12"
+      "accessedAt": "2026-11-14",
+      "publishedAt": "2026-11-13"
     }
   ],
   "relations": [
@@ -7414,6 +7432,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-08-21",
       "validFrom": "2026-08-21",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:0248816102284-64",
+      "from": "eu-tr:organization:0248816102284-64",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-01-20",
+      "validFrom": "2026-01-20",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -12913,6 +12944,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2018-11-19",
       "validFrom": "2018-11-19",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:3876942101065-70",
+      "from": "eu-tr:organization:3876942101065-70",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2025-10-29",
+      "validFrom": "2025-10-29",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -19062,6 +19106,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2026-01-22",
       "validFrom": "2026-01-22",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:7978291107264-42",
+      "from": "eu-tr:organization:7978291107264-42",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-12",
+      "validFrom": "2026-11-12",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
