@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -834,12 +834,6 @@
     {
       "id": "eu-tr:organization:115735351207-71",
       "name": "Francesco Grillo",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:116277444682-12",
-      "name": "Consorzio Italiano Biogas e Gassificazione",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -1896,12 +1890,6 @@
     {
       "id": "eu-tr:organization:270417191961-75",
       "name": "ASSOPAM - Associazione Nazionale Professionisti Agenti e Mediatori Creditizi",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:270711694542-55",
-      "name": "Fairtrade Italia",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -4306,12 +4294,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:6112270101273-59",
-      "name": "EIS 2050",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:6129551101622-17",
       "name": "Università degli Studi di Udine",
       "type": "organizzazione",
@@ -6520,12 +6502,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:937812815077-68",
-      "name": "Terna spa",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:938017035680-90",
       "name": "MUTUA MBA SOCIETA' COOPERATIVA PER AZIONI",
       "type": "organizzazione",
@@ -7042,8 +7018,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-15",
-      "publishedAt": "2026-11-14"
+      "accessedAt": "2026-11-16",
+      "publishedAt": "2026-11-15"
     }
   ],
   "relations": [
@@ -8836,19 +8812,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2023-09-13",
       "validFrom": "2023-09-13",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:116277444682-12",
-      "from": "eu-tr:organization:116277444682-12",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2021-12-06",
-      "validFrom": "2021-12-06",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -11137,19 +11100,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2024-03-16",
       "validFrom": "2024-03-16",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:270711694542-55",
-      "from": "eu-tr:organization:270711694542-55",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2024-11-07",
-      "validFrom": "2024-11-07",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -16356,19 +16306,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:6112270101273-59",
-      "from": "eu-tr:organization:6112270101273-59",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2025-11-12",
-      "validFrom": "2025-11-12",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:6129551101622-17",
       "from": "eu-tr:organization:6129551101622-17",
       "to": "eu-tr:institution:transparency-register",
@@ -21147,19 +21084,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2021-03-09",
       "validFrom": "2021-03-09",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:937812815077-68",
-      "from": "eu-tr:organization:937812815077-68",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2014-12-02",
-      "validFrom": "2014-12-02",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
