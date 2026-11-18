@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "real",
-  "updatedAt": "2026-11-17",
+  "updatedAt": "2026-11-18",
   "entities": [
     {
       "id": "eu-tr:institution:transparency-register",
@@ -1734,6 +1734,12 @@
     {
       "id": "eu-tr:organization:245121919701-54",
       "name": "European Lawyers Foundation-Fondazione degli avvocati europei",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
+      "id": "eu-tr:organization:2458560107335-51",
+      "name": "AG. S.r.l.s.",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -4708,6 +4714,12 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
+      "id": "eu-tr:organization:6641149107338-91",
+      "name": "MIRA Network ETS",
+      "type": "organizzazione",
+      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
+    },
+    {
       "id": "eu-tr:organization:664279051278-22",
       "name": "SRM - Studi e Ricerche per il Mezzogiorno",
       "type": "organizzazione",
@@ -5554,12 +5566,6 @@
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
     {
-      "id": "eu-tr:organization:7977706102232-69",
-      "name": "CARRARO LAB SRL",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
       "id": "eu-tr:organization:7978291107264-42",
       "name": "Mediterranean Transmission System Operators",
       "type": "organizzazione",
@@ -5706,12 +5712,6 @@
     {
       "id": "eu-tr:organization:812950825975-89",
       "name": "Maendeleo for Children APS ETS",
-      "type": "organizzazione",
-      "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
-    },
-    {
-      "id": "eu-tr:organization:8138303102990-03",
-      "name": "SCOTTA",
       "type": "organizzazione",
       "description": "Organizzazione con sede in Italia iscritta al Registro per la trasparenza dell'UE. L'iscrizione non implica comportamenti illeciti."
     },
@@ -7024,8 +7024,8 @@
       "title": "EU Transparency Register — registered organizations",
       "url": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
       "publisher": "European Commission — Transparency Register",
-      "accessedAt": "2026-11-17",
-      "publishedAt": "2026-11-16"
+      "accessedAt": "2026-11-18",
+      "publishedAt": "2026-11-17"
     }
   ],
   "relations": [
@@ -10768,6 +10768,19 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2015-11-27",
       "validFrom": "2015-11-27",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
+      "id": "rel:eu-tr:2458560107335-51",
+      "from": "eu-tr:organization:2458560107335-51",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-06",
+      "validFrom": "2026-11-06",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
@@ -17209,6 +17222,19 @@
       ]
     },
     {
+      "id": "rel:eu-tr:6641149107338-91",
+      "from": "eu-tr:organization:6641149107338-91",
+      "to": "eu-tr:institution:transparency-register",
+      "type": "iscrizione",
+      "label": "Iscrizione al Registro per la trasparenza dell'UE",
+      "eventDate": "2026-11-17",
+      "validFrom": "2026-11-17",
+      "validTo": null,
+      "sourceIds": [
+        "source:eu-transparency"
+      ]
+    },
+    {
       "id": "rel:eu-tr:664279051278-22",
       "from": "eu-tr:organization:664279051278-22",
       "to": "eu-tr:institution:transparency-register",
@@ -19042,19 +19068,6 @@
       ]
     },
     {
-      "id": "rel:eu-tr:7977706102232-69",
-      "from": "eu-tr:organization:7977706102232-69",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2026-01-22",
-      "validFrom": "2026-01-22",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
       "id": "rel:eu-tr:7978291107264-42",
       "from": "eu-tr:organization:7978291107264-42",
       "to": "eu-tr:institution:transparency-register",
@@ -19374,19 +19387,6 @@
       "label": "Iscrizione al Registro per la trasparenza dell'UE",
       "eventDate": "2017-02-19",
       "validFrom": "2017-02-19",
-      "validTo": null,
-      "sourceIds": [
-        "source:eu-transparency"
-      ]
-    },
-    {
-      "id": "rel:eu-tr:8138303102990-03",
-      "from": "eu-tr:organization:8138303102990-03",
-      "to": "eu-tr:institution:transparency-register",
-      "type": "iscrizione",
-      "label": "Iscrizione al Registro per la trasparenza dell'UE",
-      "eventDate": "2026-03-11",
-      "validFrom": "2026-03-11",
       "validTo": null,
       "sourceIds": [
         "source:eu-transparency"
