@@ -1,12 +1,12 @@
 {
-  "exportDate": "2026-11-21",
-  "globalRegistrations": 18133,
+  "exportDate": "2026-11-22",
+  "globalRegistrations": 18115,
   "italianOrganizations": 1169,
-  "excludedOrOtherCountry": 16939,
+  "excludedOrOtherCountry": 16921,
   "rejectedItalianRecords": 25,
   "sourceUrl": "https://ec.europa.eu/transparencyregister/public/files/ODP/download/XML/latest",
-  "downloadBytes": 118937991,
-  "archiveSha256": "89bcd355cc9f1f2b33644c990569a102d65a12bd021376d6b457c8a3f5891fac",
+  "downloadBytes": 118830149,
+  "archiveSha256": "f5b9d644e7d6a1b5ffa0e47bdd3842bdc47c574f4e2c2d07e64cdf1126e1d902",
   "invalidXmlCharactersReplaced": 8,
   "automatic": true,
   "qualityGate": "eu-registrations-v1"
